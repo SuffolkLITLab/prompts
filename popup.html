@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<title>Prompt Interactions</title>
+<script src="js/spin.min.js"></script>
+<script src="js/functions.js"></script>
+<script src="js/prompts.js"></script>
+<script src="js/popup.js"></script>
+<link rel="stylesheet" type="text/css" href="css/popup.css">
+</head>
+<body>
+  <div id="inline_scratch">
+    <div class="file_menu">
+      <a href="#" id="open_scratch" class="files">Open</a>  
+      <input type="file" id="fileInput" style="display: none;"/>
+      <a href="#" id="save_scratch" class="files">Save</a>   
+    </div>
+    <div class="scratch_frame">
+      <textarea id="scratch_pad" placeholder="This space holds text for use with the prompt interactions found to the right."></textarea>
+    </div>
+  </div> 
+  <div id="main_wrapper">
+    <div id="inner_wrapper">
+      <!--
+        START CUSTOM CONTENT
+      -->
+      <div class="custom_header"></div>
+      <!--
+        END CUSTOM CONTENT
+      -->
+      <div id="button_list"></div>
+      <div id="transcript" style="display:none;">
+        <div id="output_window"></div>
+      </div>
+      <div id="thinking_box">
+        <div id="thinking"></div>
+      </div>
+      <div id="text_input" style="display:none;">
+        <textarea id="user_input"></textarea>
+        <button id="send" style="width:100%;margin:5px 0 10px 0;">Send</button>
+      </div>
+      <div id="chat_text_input" style="display:none;">
+        <textarea id="chat_user_input"></textarea>
+        <button id="chat_send" style="width:100%;margin:5px 0 10px 0;">Send</button>
+      </div>
+      <div id="continue_gen" style="display:none;">
+        <button id='continueButton'>Continue text generation</button>
+      </div>
+      <a href="#" id="save_transcript">save transcript</a>
+      <button id="restartButton">Restart</button>
+      <div id="credentials" style="display:none;">
+        <table id="credentials_table">
+          <tr><td>API&nbsp;Base:&nbsp;</td><td width="100%"><input id="api_base" style="width:100%"></td></tr>
+          <tr><td>API&nbsp;Key:&nbsp;</td><td width="100%"><input id="api_key" style="width:100%"></td></tr>
+        </table>        
+        <button id='credentialsButton'>Update/Save Credentials</button>
+      </div>
+      <div id="choices" style="display:none;">
+        <select id="toPrompt" style="width:100%;margin:5px 0 8px 0;text-align:center;">
+          <option value="">Pass output to prompt (choose one)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <button id="config">Templates &amp; Settings</button>
+    <button id="scratch">Scratch Pad</button>
+    <span style="float:right">
+      <button id="about">About</button>
+      <button id="feedback">Feedback</button>
+    </span>
+  </div>
+</body>
+</html>

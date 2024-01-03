@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Prompt Templates &amp; Settings</title>
+    <link rel="stylesheet" href="css/options.css" />
+    <script src="js/functions.js"></script>
+    <script src="js/options.js"></script>
+  </head>
+  <body style="padding:5px 20px 40px 20px;">
+
+    <h2>LIT Prompts</h2>
+
+    <p>This browser extension is a project of Suffolk University Law School's <a href="https://suffolklitlab.org/" target="_blank">Legal Innovation &amp; Technology (LIT) Lab</a>. It was designed to help students explore <a href="https://en.wikipedia.org/wiki/Prompt_engineering" target="_blank">prompt engineering</a>. Below you can create and save prompt templates for use by this extension. These templates can use data from your active browser window (e.g., selected text or the whole text of a webpage) as well as text input provided by you. They can also feed into each other, allowing one to create complex interactions. For example, you can make interactions that:</p>
+    <ul>
+      <li>Summarize and ask questions of a webpage (e.g., What are the main conclusions of this article? What did <i>so and so</i> say about <i>this</i> or <i>that</i>?). <a href="https://github.com/SuffolkLITLab/prompts/tree/main#summarize--question-this-page" target="_projectPage" class="example">sample</a></li>
+      <li>Draft an email reply responding to selected text. Then place it in your clipboard ready to paste into an email. <a href="https://github.com/SuffolkLITLab/prompts/tree/main#politely-decline-an-email-selected-text" target="_projectPage" class="example">sample</a></li>      
+      <li>Define a selected word or phrase, appending the definition to a local Scratch Pad. <a href="https://github.com/SuffolkLITLab/prompts/tree/main#define-selected-wordphrase" target="_projectPage" class="example">sample</a></li>
+      <li>Save contents of Scratch Pad to a file. <a href="https://github.com/SuffolkLITLab/prompts/tree/main#save-scratch-pad-to-file" target="_projectPage" class="example">sample</a></li>
+      <li>Summarize and ask questions of text in the Scratch Pad (e.g., you could cut-and-paste content into the Scratch Pad when it's not available on a webpage). <a href="https://github.com/SuffolkLITLab/prompts/tree/main#summarize--question-scratch-pad" target="_projectPage" class="example">sample</a></li>
+      <li>Return a structured representation of a string's sentence structure (i.e., "diagram" a sentence in JSON). <a href="https://github.com/SuffolkLITLab/prompts/tree/main#diagram-selected-sentence" target="_projectPage" class="example">sample</a></li>
+      <li>Translate selected text from one language into another. Then draft a reply in the original language. <a href="https://github.com/SuffolkLITLab/prompts/tree/main#translate--reply-in-orginal-language" target="_projectPage" class="example">sample</a></li>
+      <li>Flip a virtual coin and write a short poem based on the outcome. <a href="https://github.com/SuffolkLITLab/prompts/tree/main#coin-flip-to-poem" target="_projectPage" class="example">sample</a></li>
+      <li>Expand/build on selected text (i.e., have an LLM ask you questions to flesh out some text). <a href="https://github.com/SuffolkLITLab/prompts/tree/main#expand-selected-short-text" target="_projectPage" class="example">sample</a></li>
+      <li>BS with the LLM of your choice. <a href="https://github.com/SuffolkLITLab/prompts/tree/main#bs-with-a-bot" target="_projectPage" class="example">sample</a></li>
+    </ul>
+    Note: you can use the template feature without engaging an <a href="https://en.wikipedia.org/wiki/Large_language_model" target="_blank">LLM</a> to produce simple fill-in-the blank output (i.e., traditional form letters). <a href="https://github.com/SuffolkLITLab/prompts/tree/main#generic-form-letter-no-llm" target="_projectPage" class="example">sample</a>
+
+    <h3>OpenAI-Compatible API Integration</h3>
+    <p>To <i>run</i> your interactions, you'll need to point to the <a href="https://en.wikipedia.org/wiki/API" target="_blank">API</a> for a <a href="https://en.wikipedia.org/wiki/Large_language_model" target="_blank">Large Language Model</a> (LLM). See e.g., <a href="https://github.com/SuffolkLITLab/prompts/tree/main#using-openai-with-lit-prompts" target="_blank">Using OpenAI with LIT Prompts</a>. If we run into an error when using the API info below, this extension will suggest that you check these credentials. You can use an OpenAI endpoint/base (i.e., <code>https://api.openai.com/v1/chat/completions</code>) along with an <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI API key</a> <i><b>OR you can use ANY endpoint that makes use of the same format!</b></i> For example, you could download something like <a href="https://lmstudio.ai/" target="_blank">LM Studio</a>, spin up a local LLM, and point this extension at <code>localhost</code> (keeping your data on your computer). See e.g., <a href="https://github.com/SuffolkLITLab/prompts/tree/main#using-lm-studio-with-lit-prompts" target="_blank">Using LM Studio with LIT Prompts</a>. Alternatively, you could use a tool like <a href="https://docs.vllm.ai/en/latest/index.html" target="_blank">vLLM</a> to spin up an OpenAI-compatible API server and point at that</a>.
+    </p>
+    <p>
+      <span class="creds">API Base: <input id="api_base" style="width:300px"></span>
+      <span class="creds">API Key: <input id="api_key" style="width:400px"></span>
+    </p>
+    <p>
+      Model selection is done on a prompt-by-prompt basis. Keep in mind, sometimes API providers retire older models. So, be sure that you keep track of that sort of thing. 
+      <i>If you use an API that lives somewhere other than on your computer (i.e., anything but <code>localhost</code>), you are sharing the contents of your prompts with the outside world. Check your API provider's privacy policy to see what they do with it.</i>
+    </p>
+
+    <h3>Export to HTML</h3>
+    <p>
+      You can export runnable versions of your interactions to one of two HTML output types: (1) a page that replicates this extension's "popup," the window with buttons that appears when you click the extension; or (2) a page that replicates both the "popup" and the "scratch pad." These outputs should run in any browser with access to the endpoint set above. <b>The files will include a copy, not only of the endpoint, but also the API key listed above!</b> If the <i>base</i> and <i>key</i> above are blank, the user will be prompted to enter their own values when they hit an error. They will NOT be able to access selected text or the innerText of any external page. The <code>{{innerText}}</code> variable will be set equal to <code>{{scratch}}</code>, and <code>{{highlihghted}}</code> will only work on text in the Scratch Pad. Additionally, they will not include links to edit the prompts or to a stand-along scratch pad. See discussion of pre-defined variables below. 
+    </p>
+    <p>The content of this textarea will be appended to your exports. HTML is allowed.</p>
+    <textarea id="custom_html"></textarea>
+    <button id="prompt2page">Download Interactions Page</button>
+    <button id="scrtach_prompt2page">Download Scrtach Pad &amp; Interactions Page</button>
+
+    <h3>Prompt Templates</h3>
+    <p>
+      Author your own prompt templates below, or explore and contribute to our <a href="https://github.com/SuffolkLITLab/prompts/tree/main/docs/templates" target="_blank">library of templates</a> (pre-written template files you can upload here).
+    </p>
+    <p>
+      When crafting a template, use a mix of plain language and variable placeholders. Specificlly, you can use double curly brackets to encase pre-defined variables and prompts for your user. If the text between the brackets matches one of our pre-defined variables, that section of text will be replaced with its content. For example, <code>{{highlighted}}</code> will be replaced by any selected/highlighted text on your current page, and <code>{{innerText}}</code> will be replaced by the text of your current page. If the text within brackets isn't a pre-defined variable, like  <code>{{What is your name?}}</code>, it will trigger a user prompt that echo's its content (e.g., "What is your name?"). After the user answers, their reply will replace this placeholder (i.e., <code>{{What is your name?}}</code>). A list of pre-defined variables can be found in the sample templates: <a href="https://github.com/SuffolkLITLab/prompts/tree/main#variables-random-outcomes-and-time" target="_blank">Variables "random outcomes" and "time"</a> and <a href="https://github.com/SuffolkLITLab/prompts/tree/main#variables-from-this-page" target="_blank">Variables "from this page"</a>. Both were included in the extension's default templates. Note: when looking at some templates, you will see comments between <code>[#</code> and <code>#]</code>. Such comments will not appear in the final prompts and are there to provide notes to template authors.
+    </p>
+    <p><b>Advanced:</b> Use the inputs after a template's name and body to set parameters. If you use the <i>Post-run Behavior</i> to send one template's output to another template, the first templat's output can be read by the second template via the <code>{{passThrough}}</code> variable. And if this value is valid JSON, you can access individual elements by calling specific keys (e.g., <code>{{passThrough["key name"]}}</code>. When using the "DYNAMIC" setting for <i>Post-run Behavior</i> the prompt found in <code>{{passThrough["next"]}}</code> will be triggered. To get a better hold on these behaviors, we recomend you read through this set of <a href="https://github.com/SuffolkLITLab/prompts/tree/main#sample-tempaltes" target="_blank">sample templates</a> in order. You should also read this documenation on <a href="https://github.com/SuffolkLITLab/prompts/tree/main#variable-handling" target="_blank">variable handeling</a>.</p>
+
+    <button id="add_prompt_to_list">Create New Template</button>
+    <span style="float:right">
+      <button id="downloadPrompts">Download</button>
+      <input type="file" id="fileInput" style="display: none;" accept=".txt" />
+      <button id="uploadPrompts" class="danger">Upload</button>
+      <button id="restoreDefaults" class="danger">Restore Defaults</button>
+      <button id="deletePrompts" class="danger" style="margin-right: 0;">Delete All</button>
+    </span>
+
+    <div id="prompt_list"></div>
+
+    <div class="footer">
+      <a href="https://suffolklitlab.org/" alt="LIT Lab" target="_blank">
+          <img id="footer_logo_long" src="img/lit_suffolk.png" border="0" height="35px" alt="LIT and Suffolk University Law School Logos" align="left"/>
+      </a>
+      <span style="float:right">
+        <a href="https://github.com/SuffolkLITLab/prompts/" target="_projectPage">GitHub</a> | 
+        <a href="https://github.com/SuffolkLITLab/prompts/issues" target="_logIssues">feedback</a> | 
+          <span id="version">v 0.1</span>
+      </span>
+  </div>
+    
+  </body>
+</html>

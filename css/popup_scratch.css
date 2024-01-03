@@ -1,0 +1,255 @@
+	* {
+		box-sizing: border-box;
+	}
+
+	input:focus, textarea {
+		outline: none;
+	}
+	
+	body {
+		font-family: Söhne,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,Helvetica Neue,Arial,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+		box-sizing: border-box;
+	}
+
+	.file_menu {
+		border-bottom: 1px solid #eee;
+		padding-left: 5px;
+	}
+
+	a.files {
+		font-size: 14px;
+		line-height: 25px;
+		text-decoration: none;
+		color: darkblue;
+	}
+
+	.scratch_frame{
+		position: absolute;
+		top:25px;
+		bottom:5px;
+		left:0px;
+		right:0px;
+	}
+
+	#scratch_pad {
+		box-sizing: border-box;
+		width:100%;
+		height:100%;
+		padding:20px;
+		border:0px solid #ccc;
+		resize: none;
+		overflow-y: auto;
+	}
+
+	.text_wrap{
+		float:left;
+		width:100%;
+		margin:0;
+		padding:0;
+	}
+
+	.input_text {
+		float:right;
+		font-size: 15px;
+		line-height: 20px;
+		margin: 0px 5px 15px 0;
+		max-width:100%;
+		margin-left:20%;
+		background:#eee;
+		border-radius:8px;
+		padding:15px;
+	}
+
+	.output_text {
+		float:left;
+		background:#425dd4;
+		font-size: 15px;
+		line-height: 20px;
+		color: white;
+		border-radius:8px;
+		margin: 0px 0 15px 0;
+		max-width:100%;
+		margin-right:20%;
+		padding:15px;
+	}
+
+	code {
+		background:#2c3e8e;
+	}
+
+	.code_wrapper {
+		padding:3px;
+		margin: 0px;
+		width:100%;
+		overflow-x: auto;
+		background:#2c3e8e;
+	}
+
+	.msg_text {
+		float:left;
+		font-family: Verdana, Geneva, sans-serif;
+		font-variant: small-caps;
+		width:100%;
+		text-align: center;
+		font-size: 14px;
+		color:#7d7878;
+		margin:0 0 15px 0;
+	}
+
+	/* -- the below is needed for interactions -- */
+
+	#button_list {
+		min-height:150px;
+		margin-bottom: 3px;
+	}
+
+	#thinking_box{
+		float:left;
+		width:100%;
+		display:none;
+	}
+
+	#thinking {
+		width:43px;
+		height:75px;
+		margin:0 auto;
+	}
+
+	#user_input{
+		width:100%;
+		height:50px;
+	}
+
+	#chat_user_input{
+		width:100%;
+		height:50px;
+	}
+
+	#continue_gen {
+		float:left;
+		width:100%;
+		margin: 0px 0 10px 0;
+	}
+
+	#continueButton{
+		width:100%;
+	}
+
+	#credentials {
+		float:left;
+		width:100%;
+		margin: 0px 0 10px 0;
+	}
+
+	#credentials_table{
+		width:100%;
+		margin: 0 0 5px 0;
+	}
+
+	#credentialsButton{
+		width:100%;
+	}
+
+	#restartButton{
+		display:none;
+		width:100%;
+		margin: 0 0 10px 0;
+	}
+
+	#save_transcript{
+		display:none;
+		float:left;
+		font-family: Verdana, Geneva, sans-serif;
+		font-variant: small-caps;
+		width:100%;
+		text-align: center;
+		font-size: 14px;
+		color:#7d7878;
+		margin:0 0 15px 0;
+	}
+
+	/*-- The below differes between export and non --*/
+
+	.custom_header{
+		margin: 0 0 10px 0;
+	}
+
+	#inline_scratch {
+		position: absolute;
+		top: 0px;
+		bottom: 0px;
+		left: 0px;
+		right: 346px;
+		overflow: hidden;
+	}
+
+	#main_wrapper{
+		position: absolute;
+		padding: 0 0px 0 18px;
+		top: 0px;
+		bottom: 0px;
+		right: 0px;
+		width:39%;
+		overflow-y: auto;
+	}
+	
+	#main_wrapper::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		width: 8px;
+		background: #ccc;
+		cursor: ew-resize;
+		display: inline-block;
+	}
+
+	#inner_wrapper{
+		height:100%;
+		width:100%;
+		overflow-y: scroll;
+		padding: 0 10px 0 0;
+	}
+
+	.footer {
+		display:none;
+	}
+
+	@media only screen and (max-width: 450px) {
+		
+		#inline_scratch {
+			position: absolute;
+			top: 0px;
+			height: 50vh;
+			width: 100%;
+			left: 0px;
+			right: 0px;
+			overflow-y: auto;
+			border-bottom: solid 1px #7d7878;
+		}
+		
+		#main_wrapper{
+			position: absolute;
+			padding: 0 10px 0 10px;
+			top: 50vh;
+			width: 100%;
+			bottom: 0px;
+			left: 0px;
+			right: 0px;
+			overflow-y: auto;
+		}
+
+		#main_wrapper::after {
+			display:none;
+		}
+
+		#inner_wrapper{
+			position: relative;
+			height:100%;
+			width:100%;
+			overflow-y: scroll;
+			padding: 0;
+		}
+	
+	}
