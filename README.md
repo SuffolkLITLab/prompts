@@ -35,14 +35,13 @@ You can export runnable versions of your interactions to one of two HTML output 
 
 # Prompt Templates
 
-
 When crafting a template, use a mix of plain language and variable placeholders. Specificlly, you can use double curly brackets to encase pre-defined variables and prompts for your user. If the text between the brackets matches one of our pre-defined variables, that section of text will be replaced with its content. For example, `{{highlighted}}` will be replaced by any selected/highlighted text on your current page, and `{{innerText}}` will be replaced by the text of your current page. If the text within brackets isn't a pre-defined variable, like `{{What is your name?}}`, it will trigger a user prompt that echo's its content (e.g., "What is your name?"). After the user answers, their reply will replace this placeholder (i.e., `{{What is your name?}}`). A list of pre-defined variables can be found below in [Variable Handling](#variable-handling). 
 
 For a crash course on how everything fits together, you can read through this set of [sample templates](#sample-tempaltes) below in order. When looking at some templates, you will see comments between `[#` and `#]`. Such comments will not appear in the final prompts and are there to provide notes to template authors. For more detail, read the next section _Variable Handling_.
 
 Note: You can explore and contribute to our [library of templates](templates) (pre-written template files you can upload here).
 
-## Variable Handling 
+## Prompt execution 
 
 TK
 
