@@ -41,7 +41,7 @@ For a crash course on how everything fits together, you can read through this se
 
 Note: You can explore and contribute to our [library of templates](templates) (pre-written template files you can upload here).
 
-## Prompt execution 
+## Prompt Execution 
 
 TK
 
