@@ -45,7 +45,7 @@ Note: You can explore and contribute to our [library of templates](templates) (p
 
 TK
 
-# Trust and Saftey
+## Trust and Saftey
 
 TK
 
