@@ -59,7 +59,7 @@ Provide a short 150 word summary of the above text. If asked any followup questi
 
 
 ```
-Output Type: `LLM`,  Model: `gpt-3.5-turbo-16k`,  Temperature: `0`,  Max Tokens: `250`,  JSON: `No`,  Default Output `Screen only`,  Post-run Behavior: `CHAT`,  Hide Button: `unchecked`  
+Output Type: `LLM`,  Model: `gpt-3.5-turbo-16k`,  Temperature: `0`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen only`,  Post-run Behavior: `CHAT`,  Hide Button: `unchecked`  
 
 ### Politely decline an email (selected text)
 ```
@@ -69,7 +69,7 @@ The above is an email. Draft a brief and professional reply politely declining i
 
 
 ```
-Output Type: `LLM`,  Model: `gpt-3.5-turbo-16k`,  Temperature: `0.7`,  Max Tokens: `250`,  JSON: `No`,  Default Output `Screen + clipboard`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
+Output Type: `LLM`,  Model: `gpt-3.5-turbo-16k`,  Temperature: `0.7`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen + clipboard`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
 
 ### Define selected word/phrase
 ```
@@ -77,13 +77,13 @@ Define the following word/phrase: {{highlighted}}
 
 
 ```
-Output Type: `LLM`,  Model: `gpt-3.5-turbo`,  Temperature: `0`,  Max Tokens: `250`,  JSON: `No`,  Default Output `Screen + append to scratch pad`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
+Output Type: `LLM`,  Model: `gpt-3.5-turbo`,  Temperature: `0`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen + append to scratch pad`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
 
 ### Save Scratch Pad to file
 ```
 {{scratch}}
 ```
-Output Type: `Prompt`,  Model: `n/a`,  Temperature: `n/a`,  Max Tokens: `n/a`,  JSON: `No`,  Default Output `Screen only`,  Post-run Behavior: `SAVE TO FILE`,  Hide Button: `unchecked`  
+Output Type: `Prompt`,  Model: `n/a`,  Temperature: `n/a`,  Max Tokens: `n/a`,  JSON: `No`,  Output To `Screen only`,  Post-run Behavior: `SAVE TO FILE`,  Hide Button: `unchecked`  
 
 ### Summarize & question Scratch Pad
 ```
@@ -93,7 +93,7 @@ Provide a short 150 word summary of the above text. If asked any followup questi
 
 
 ```
-Output Type: `LLM`,  Model: `gpt-3.5-turbo-16k`,  Temperature: `0`,  Max Tokens: `250`,  JSON: `No`,  Default Output `Screen only`,  Post-run Behavior: `CHAT`,  Hide Button: `unchecked`  
+Output Type: `LLM`,  Model: `gpt-3.5-turbo-16k`,  Temperature: `0`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen only`,  Post-run Behavior: `CHAT`,  Hide Button: `unchecked`  
 
 ### "Diagram" selected sentence
 ```
@@ -155,7 +155,7 @@ Now that I've given you these specifications, your job is to make such an object
 
 Now provide your JSON object:
 ```
-Output Type: `LLM`,  Model: `gpt-3.5-turbo`,  Temperature: `0`,  Max Tokens: `250`,  JSON: `Yes`,  Default Output `Screen only`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
+Output Type: `LLM`,  Model: `gpt-3.5-turbo`,  Temperature: `0`,  Max Tokens: `250`,  JSON: `Yes`,  Output To `Screen only`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
 
 ### Translate & reply in original language
 ```
@@ -168,7 +168,7 @@ Return a JSON object with two key-value pairs. The first key is called `language
 Now return the object: 
 
 ```
-Output Type: `LLM`,  Model: `gpt-3.5-turbo-16k`,  Temperature: `0`,  Max Tokens: `250`,  JSON: `Yes`,  Default Output `Hidden`,  Post-run Behavior: `display translation and prompt`,  Hide Button: `unchecked`  
+Output Type: `LLM`,  Model: `gpt-3.5-turbo-16k`,  Temperature: `0`,  Max Tokens: `250`,  JSON: `Yes`,  Output To `Hidden`,  Post-run Behavior: `display translation and prompt`,  Hide Button: `unchecked`  
 
 ### display translation and prompt
 ```
@@ -176,7 +176,7 @@ Translate the following text into {{passThrough["language"]}}. Here's the text t
 
 {{{{passThrough["translation"]}}}}
 ```
-Output Type: `LLM`,  Model: `gpt-3.5-turbo`,  Temperature: `0`,  Max Tokens: `250`,  JSON: `No`,  Default Output `Screen + clipboard`,  Post-run Behavior: `FULL STOP`,  Hide Button: `checked`  
+Output Type: `LLM`,  Model: `gpt-3.5-turbo`,  Temperature: `0`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen + clipboard`,  Post-run Behavior: `FULL STOP`,  Hide Button: `checked`  
 
 ### Coin flip to poem
 ```
@@ -188,7 +188,7 @@ Now give me your response/poem:
 
 
 ```
-Output Type: `LLM`,  Model: `gpt-3.5-turbo`,  Temperature: `0.9`,  Max Tokens: `250`,  JSON: `No`,  Default Output `Screen only`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
+Output Type: `LLM`,  Model: `gpt-3.5-turbo`,  Temperature: `0.9`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen only`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
 
 ### Expand selected short text
 ```
@@ -198,7 +198,7 @@ WRITER: {{highlighted}}
 
 Think about how your character would respond and craft an appropriate reply. You will provide the text of this reply along with one other piece of information as a JSON object. The object will have twp key-value pairs. The first key-value pair's key is "transcript" and the value is that of the transcript above, starting with "WRITER:" and followed by the text of their copy. Be sure to escape an quotation marks. The second key-value pair has a key called "reply" and its value is the response you crafted above (i.e., it is the text of your character's reply to the above, your first question for the writer). Include only the text of your reply (e.g., do NOT preface the text with the name of the speaker).
 ```
-Output Type: `LLM`,  Model: `gpt-3.5-turbo-1106`,  Temperature: `0.7`,  Max Tokens: `250`,  JSON: `Yes`,  Default Output `Hidden`,  Post-run Behavior: `Role Play 1`,  Hide Button: `unchecked`  
+Output Type: `LLM`,  Model: `gpt-3.5-turbo-1106`,  Temperature: `0.7`,  Max Tokens: `250`,  JSON: `Yes`,  Output To `Hidden`,  Post-run Behavior: `Role Play 1`,  Hide Button: `unchecked`  
 
 ### Role Play 1
 ```
@@ -207,7 +207,7 @@ YOU: {{passThrough["reply"]}}
 WRITER: {{{{passThrough["reply"]}}*}}
 
 ```
-Output Type: `Prompt`,  Model: `n/a`,  Temperature: `n/a`,  Max Tokens: `n/a`,  JSON: `No`,  Default Output `Hidden + replace scratch pad`,  Post-run Behavior: `Role Play 2`,  Hide Button: `checked`  
+Output Type: `Prompt`,  Model: `n/a`,  Temperature: `n/a`,  Max Tokens: `n/a`,  JSON: `No`,  Output To `Hidden + replace scratch pad`,  Post-run Behavior: `Role Play 2`,  Hide Button: `checked`  
 
 ### Role Play 2
 ```
@@ -218,7 +218,7 @@ You are an actor playing the role of a helpful writing assistant. In this scene 
 Think about how your character would respond and craft an appropriate reply. You will provide the text of this reply along with one other piece of information as a JSON object. The object will have three key-value pairs. The first key-value pair's key is "transcript" and the value is that of the transcript above, starting with "WRITER:" the text of their copy and the subsequent questions and answers. Be sure to escape an quotation marks. And DO NOT repeat yourself (i.e., ask new questions). The second key-value pair has a key called "reply" and its value is the response you crafted above (i.e., it is the text of your character's reply to the above, your question for the writer). Make sure it's a question. Include only the text of your reply (e.g., do NOT preface the text with the name of the speaker). 
 
 ```
-Output Type: `LLM`,  Model: `gpt-3.5-turbo-1106`,  Temperature: `0.7`,  Max Tokens: `250`,  JSON: `Yes`,  Default Output `Hidden`,  Post-run Behavior: `Role Play 3`,  Hide Button: `checked`  
+Output Type: `LLM`,  Model: `gpt-3.5-turbo-1106`,  Temperature: `0.7`,  Max Tokens: `250`,  JSON: `Yes`,  Output To `Hidden`,  Post-run Behavior: `Role Play 3`,  Hide Button: `checked`  
 
 ### Role Play 3
 ```
@@ -226,7 +226,7 @@ YOU: {{passThrough["reply"]}}
 WRITER: {{{{passThrough["reply"]}}*}}
 
 ```
-Output Type: `Prompt`,  Model: `n/a`,  Temperature: `n/a`,  Max Tokens: `n/a`,  JSON: `No`,  Default Output `Hidden + append to scratch`,  Post-run Behavior: `Role Play 4`,  Hide Button: `checked`  
+Output Type: `Prompt`,  Model: `n/a`,  Temperature: `n/a`,  Max Tokens: `n/a`,  JSON: `No`,  Output To `Hidden + append to scratch`,  Post-run Behavior: `Role Play 4`,  Hide Button: `checked`  
 
 ### Role Play 4
 ```
@@ -237,7 +237,7 @@ You are an actor playing the role of a helpful writing assistant. In this scene 
 You will provide a JSON object in response to the above with a key named `next`. In your role as a writing assistant, consider if there is enough material in the above transcript to pad the original copy by 20%. You probably need at least three or four rounds of Q&A. However, if the replies are light on content, you may need more. If you have enough material to add 20% in length to the original copy, set the value of `next` to "Role Play 5".  Otherwise, if you feel you need more, the value of `next` should be "Role Play 2". 
 
 ```
-Output Type: `LLM`,  Model: `gpt-3.5-turbo-1106`,  Temperature: `0.7`,  Max Tokens: `250`,  JSON: `Yes`,  Default Output `Hidden`,  Post-run Behavior: `DYNAMIC`,  Hide Button: `checked`  
+Output Type: `LLM`,  Model: `gpt-3.5-turbo-1106`,  Temperature: `0.7`,  Max Tokens: `250`,  JSON: `Yes`,  Output To `Hidden`,  Post-run Behavior: `DYNAMIC`,  Hide Button: `checked`  
 
 ### Role Play 5
 ```
@@ -249,14 +249,14 @@ Use what you learned above to rewrite the original copy, adding details learned 
 
 
 ```
-Output Type: `LLM`,  Model: `gpt-3.5-turbo-1106`,  Temperature: `0.7`,  Max Tokens: `2000`,  JSON: `No`,  Default Output `Screen + clipboard`,  Post-run Behavior: `FULL STOP`,  Hide Button: `checked`  
+Output Type: `LLM`,  Model: `gpt-3.5-turbo-1106`,  Temperature: `0.7`,  Max Tokens: `2000`,  JSON: `No`,  Output To `Screen + clipboard`,  Post-run Behavior: `FULL STOP`,  Hide Button: `checked`  
 
 ### BS with a "bot"
 ```
 {{Yes?}}
 
 ```
-Output Type: `LLM`,  Model: `gpt-3.5-turbo-16k`,  Temperature: `0.7`,  Max Tokens: `250`,  JSON: `No`,  Default Output `Screen only`,  Post-run Behavior: `CHAT`,  Hide Button: `unchecked`  
+Output Type: `LLM`,  Model: `gpt-3.5-turbo-16k`,  Temperature: `0.7`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen only`,  Post-run Behavior: `CHAT`,  Hide Button: `unchecked`  
 
 ### Generic form letter (no LLM)
 ```
@@ -269,7 +269,7 @@ Output Type: `LLM`,  Model: `gpt-3.5-turbo-16k`,  Temperature: `0.7`,  Max Token
 Sincerely, 
 {{What's your name}}
 ```
-Output Type: `Prompt`,  Model: `n/a`,  Temperature: `n/a`,  Max Tokens: `250`,  JSON: `No`,  Default Output `Screen + clipboard`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
+Output Type: `Prompt`,  Model: `n/a`,  Temperature: `n/a`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen + clipboard`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
 
 ### Variables "random outcomes" and "time"
 ```
@@ -307,7 +307,7 @@ Browser Date and Time:
 
 It is {{hours}}:{{minutes2d}}:{{seconds2d}} {{ampm}} on {{DayOfWeek}}, {{Month}} {{day}}, {{year}}
 ```
-Output Type: `Prompt`,  Model: `n/a`,  Temperature: `n/a`,  Max Tokens: `250`,  JSON: `No`,  Default Output `Screen only`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
+Output Type: `Prompt`,  Model: `n/a`,  Temperature: `n/a`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen only`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
 
 ### Variables "from this page"
 ```
@@ -321,4 +321,4 @@ Page Data:
 - innerText of page: {{innerText}}
 
 ```
-Output Type: `Prompt`,  Model: `n/a`,  Temperature: `n/a`,  Max Tokens: `250`,  JSON: `No`,  Default Output `Screen only`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
+Output Type: `Prompt`,  Model: `n/a`,  Temperature: `n/a`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen only`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
