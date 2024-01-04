@@ -387,7 +387,7 @@ function createParameterInput(labelText, inputId, dataPrompt, inputType, inputVa
             input.checked = inputValue;
             questionMark = document.createElement('span');
             questionMark.innerHTML = ` <button id="tokens-q" class="question">?</button>`;
-            questionMark.addEventListener('click', () => alert('Hide this template\'s button for the main list of buttons.'));
+            questionMark.addEventListener('click', () => alert('Hide this template\'s button from the main list of interaction buttons.'));
 
             // Create a label for the checkbox
             const checkboxLabel = document.createElement('label');

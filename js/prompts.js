@@ -328,8 +328,8 @@ function choose_prompt(choice) {
       abandon_prompt = 0;
       // Place selected text into template
       if (selectedText=="" && template.match(/{{highlighted}}/g)) {
-        console.log("Unable to find Highlighted / Selected text for this page.");
-        if (confirm('Unable to find Highlighted / Selected text for this page. Choose "OK" to continue with an empty value or "Cancel" to stop this prompt.') == true) {
+        console.log("Unable to find highlighted/selected text for this page.");
+        if (confirm('Unable to find highlighted/selected text for this page. Choose "OK" to continue with an empty value or "Cancel" to stop this template.') == true) {
           llm_prompt = llm_prompt.replace(/{{highlighted}}/g, ""); 
           llm_prompt = llm_prompt.replace(/{{nSelectedWords}}/g, 0); 
         } else {

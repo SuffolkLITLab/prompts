@@ -45,11 +45,63 @@ Note: You can explore and contribute to our [library of templates](templates) (p
 
 ## Prompt Execution 
 
-TK
+When you run a template prompt with the LIT Prompts extension this is what happens to the text of your template:
+
+1. Any text found between `[#` and `#]` is removed (i.e., all comments are removed)
+2. An attempt is made to replace the following placeholders with known text. That is, we try to:
+-- replace `{{highlighted}}` with any highlighted/selected text 
+-- replace `{{innerText}}` with the [innerText]() of the active browser tab (roughly speaking the hard-coded text of the page)
+3. If we were able to find highlighted text or read the innerText, we attempt to replace the following placeholders with word counts, where:
+-- `{{nSelectedWords}}` is the number of highlighted words; and
+-- `{{nWordsOnPage}}` is the number of words found in the innerText
+4. An attempt is made to replace `{{scrtach}}` with the contents of your Scratch Pad
+5. If this template was triggered by a preceding template, we replace `{{passThrough}}` with the whole prompt.
+6. If the content of `{{passThrough}}` is valid JSON, we look for references to individual first-level keys and replace such references with the key's value (e.g., `{{passThrough["next"]}}` would be replaced with the value of the key "next")
+7. We calculate the values for a bunch of predefined variables and replace the relevant placeholder if they exists in the template. Namely:
+-- Coin Flip (heads or tails): {{coinFlip}}
+-- D4 (1-4): {{d4}} 
+-- D6 (1-6): {{d6}}
+-- D8 (1-8): {{d8}}
+-- D% (0-9): {{d%}}
+-- D20 (1-20): {{d20}}
+-- Day of week (0-6): {{dayOfWeek}}
+-- Day of week (English): {{DayOfWeek}}
+-- Month (1-12): {{month}}
+-- Month (01-12): {{month2d}}
+-- Month (English): {{Month}}
+-- Day of Month (0-31): {{day}}
+-- Day of Month (01-31): {{day2d}}
+-- Year: {{year}}
+-- Hour (1-12): {{hours}}
+-- Hour (01-12): {{hours2d}}
+-- Hour (0-23): {{hours24}}
+-- Hour (00-23): {{hours242d}}
+-- AM or PM: {{ampm}}
+-- Minute (0-59): {{minutes}}
+-- Minute (00-59): {{minutes2d}}
+-- Second (0-59): {{seconds}}
+-- Second (00-59): {{seconds2d}}
+-- All together: 
+8. We look for any placeholders that aren't in the list above and prompt the user to provide a value. That is, if there is text encased in double curly brackets and it is not a predefined variable, like `{{What is your name?}}`, it will trigger a user prompt that echo's its content (e.g., they will see a text bubble containing, "What is your name?"). After the user answers, the text of their reply will replace this placeholder (i.e., `{{What is your name?}}`). Note: if such a placeholder shows up multiple times in a single template or in a chain of templates triggering one after the other, the default behavior is to only ask the user to provide a reply once. To override this behavior place an asterisk before the closing brackets (i.e., `*}}`).
+9. After the template has been processed the behavior of your interaction is defined by the parameters found below the template text on _Templates and Settings_.
+-- Output Type: When you run this prompt template, should it echo back the text of the prompt or an LLM's reply?  
+-- Model: What model should be used (e.g. gpt-3.5-turbo).  
+-- Temperature: How "random" should replies be (0-1), where 0 is very predictable and 1 is the most unpredictable.  
+-- Max Tokens: Max number of tokens to include in your answer. 1 token ~= 1.7 words. Smaller answers are quicker (and less expensive).  
+-- JSON: If your model supports JSON Mode, we will turn on JSON Mode, if not, we will alert you when output isn't proper JSON.
+-- Output To : Decide where output should go (e.g., to the screen or the screen and the clipboard). 
+-- Post-run Behavior: After this prompt template is run, what next? Should we stop, save the output to a file, chat, or trigger another prompt template? Note: if you choose DYNAMIC, this will trigger the prompt found in `{{passThrough["next"]}}`. See above for a discussion of variables.
+-- Hide Button: Hide this template's button from the main list of interaction buttons.
 
 ## Trust and Safety
 
-TK
+Here is a non-exhaustive list of trust and safety issues you should consider when using LLMs:
+
+1. Their potential to perpetuate bias / produce output that is somehow wrong
+2. Their potential for data leakage (the inadvertent exposing sensitive info)
+3. The risks that come with running unknown "code"
+
+It's also important to note that LIT Prompts is a wrapper for LLMs (i.e., one can use it to access LLMs we didn't build). Different models will have different behaviors, and different providers will have different policies surrounding data handling. You should research these when choosing a model with an eye on how these differences will inform 1 and 2 above. You can see some introductory discussion of 1 in the first 20 min of [this video](https://www.youtube.com/watch?v=9rBFAZSh1Wc). As for 3, consider the fact that prompts are just normal text. This text acts a code, shaping the response you get when providing it to an LLM. Consequently, if you create a template that takes in unknown text (e.g., the text of a webpage you just visited), there's a chance that text will override or effect your LLM's output in unexpected ways. See [prompt injection](https://en.wikipedia.org/wiki/Prompt_engineering#Prompt_injection).
 
 ## Sample Templates
 
