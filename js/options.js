@@ -362,7 +362,7 @@ function createParameterInput(labelText, inputId, dataPrompt, inputType, inputVa
             input.className = 'input-model';
             questionMark = document.createElement('span');
             questionMark.innerHTML = ` <button id="input-model-q" class="question">?</button>`;
-            questionMark.addEventListener('click', () => alert('What model should be used (e.g. gpt-3.5-turbo-16k).'));
+            questionMark.addEventListener('click', () => alert('What model should be used (e.g. gpt-3.5-turbo).'));
             break;
         case 'temperature':
             input.step = (inputType === 'number') ? '0.01' : '1';
@@ -443,7 +443,7 @@ function createParameterSelect(labelText, selectId, dataPrompt, options, selecte
     questionMark.innerHTML = ` <button id="`+selectId+`-q" class="question">?</button>`;
 
     if (selectId=="output"){
-        questionMark.addEventListener('click', () => alert("When you run this prompt template, should it echo back the text of the Prompt or an LLM's reply?"));
+        questionMark.addEventListener('click', () => alert("When you run this prompt template, should it echo back the text of the prompt or an LLM's reply?"));
     } else if (selectId=="json_mode") {
         questionMark.addEventListener('click', () => alert("If your model supports JSON Mode, we will turn on JSON Mode, if not, we will alert you when output isn't proper JSON."));
     } else if (selectId=="output_to") {
@@ -647,7 +647,7 @@ function build_export() {
     fileText = fileText.replace(`api_base = "https://api.openai.com/v1/chat/completions"`,`api_base = "`+localStorage.api_base+`"`);
 
     fileText = fileText.replaceAll(`Please check its contents by clicking "Templates & Settings" bellow.`,``)
-    fileText = fileText.replaceAll(`, API Key, and model. You can edit these after clicking the "Templates & Settings" button below.`,` and API Key. The credentials may have expired.`)
+    fileText = fileText.replaceAll(`, API Key, and model. You can edit these after clicking the "Templates & Settings" button below.`,` and API Key. The credentials may have expired, or the model used by this tools' author my have been retired.`)
     fileText = fileText.replaceAll(`//FOR EXPORT: `,``)
 
     fileText = fileText.replace(`<div class="custom_header"></div>`,`<div class="custom_header">`+document.getElementById('custom_html').value+`</div>`)
@@ -673,7 +673,7 @@ function build_export_w_scrtach() {
 
     fileText = fileText.replaceAll(`<title>Prompt Interactions</title>`,`<title>Prompt Interactions with Scratch Pad</title>`)
     fileText = fileText.replaceAll(`Please check its contents by clicking "Templates & Settings" bellow.`,``)
-    fileText = fileText.replaceAll(`, API Key, and model. You can edit these after clicking the "Templates & Settings" button below.`,` and API Key. The credentials may have expired.`)
+    fileText = fileText.replaceAll(`, API Key, and model. You can edit these after clicking the "Templates & Settings" button below.`,` and API Key. The credentials may have expired, or the model used by this tools' author my have been retired.`)
     fileText = fileText.replaceAll(`//FOR EXPORT: `,``)
 
     fileText = fileText.replace(`<div class="custom_header"></div>`,`<div class="custom_header">`+document.getElementById('custom_html').value+`</div>`)

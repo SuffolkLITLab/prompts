@@ -34,6 +34,7 @@ window.addEventListener("focus", active);
 
 var current_text = document.getElementById('scratch_pad').value
 document.getElementById('scratch_pad').focus();
+document.getElementById('scratch_pad').setSelectionRange(0,0);
 
 document.addEventListener('DOMContentLoaded', function() {
         

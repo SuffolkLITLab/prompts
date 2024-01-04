@@ -421,7 +421,7 @@ function choose_prompt(choice) {
       llm_prompt = llm_prompt.replace(/{{d6}}/g,roll);
       roll = Math.floor(Math.random() * 8) + 1
       llm_prompt = llm_prompt.replace(/{{d8}}/g,roll);
-      roll = Math.floor(Math.random() * 11)
+      roll = Math.floor(Math.random() * 10)
       llm_prompt = llm_prompt.replace(/{{d%}}/g,roll);
       roll = Math.floor(Math.random() * 12) + 1
       llm_prompt = llm_prompt.replace(/{{d12}}/g,roll);

@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "version": "0.1",
+    "version": "0.1.0",
     "name": "LIT Prompts",
     "description": "Create and run LLM prompt templates based on in-browser content and user input.",
     "homepage_url": "https://github.com/SuffolkLITLab/prompts",
