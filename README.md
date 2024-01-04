@@ -27,7 +27,7 @@ After openig [LM Studio](https://lmstudio.ai/) and downloading a model/models.
 2. Select your model
 3. Make sure that _Cross-Origin-Resource-Sharing_ is on
 4. Start your server
-5. copy the url for your server and use that as your API Base on LIT Prompt's _Templates and Settings_ screen (you can leave the API Key blank) 
+5. Copy the url for your server and use that as your API Base on LIT Prompt's _Templates and Settings_ screen (you can leave the API Key blank) 
 
 # Export Interactions to HTML
 
