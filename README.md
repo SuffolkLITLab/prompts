@@ -21,7 +21,7 @@ On LIT Prompt's _Templates and Settings_ screen, set your API Base to `https://a
 
 ![Screen shot of LM Studio with numbers and arrows pointing to the sections described below](docs/images/LM_Studio.png)
 
-After openig [LM Studio](https://lmstudio.ai/) and downloading a model/models. 
+After opening [LM Studio](https://lmstudio.ai/) and downloading a model/models. 
 
 1. Select the "Local Inference Server" screen
 2. Select your model
@@ -31,15 +31,15 @@ After openig [LM Studio](https://lmstudio.ai/) and downloading a model/models.
 
 # Export Interactions to HTML
 
-You can export runnable versions of your interactions to one of two HTML output types: (1) a page that replicates this extension's "popup," the window with buttons that appears when you click the extension; or (2) a page that replicates both the "popup" and the "Scratch Pad." See the extention's _Templates & Settings_ screen for details. 
+You can export runnable versions of your interactions to one of two HTML output types: (1) a page that replicates this extension's "popup," the window with buttons that appears when you click the extension; or (2) a page that replicates both the "popup" and the "Scratch Pad." See the extension's _Templates & Settings_ screen for details. 
 
 # Prompt Templates
 
-When crafting a template, use a mix of plain language and variable placeholders. Specificlly, you can use double curly brackets to encase predefined variables and prompts for your user. If the text between the brackets matches one of our predefined variables, that section of text will be replaced with its content. For example, `{{highlighted}}` will be replaced by any selected/highlighted text on your current page, `{{innerText}}` will be replaced by the [innerText](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText) of your current page (roughly speaking the hard-coded text of a page), and `{{scratch}}` will be replaced with the contents of your Scratch Pad. If the text within brackets is not a predefined variable, like  `{{What is your name?}}`, it will trigger a user prompt for your user that echo's its content (e.g., they will see a text bubble containing, "What is your name?"). After the user answers, their reply will replace this placeholder (i.e., `{{What is your name?}}`). A list of predefined variables can be found in the sample templates: [Variables "random outcomes" and "time"](#variables-random-outcomes-and-time) and [Variables "from this page"](#variables-from-this-page). 
+When crafting a template, use a mix of plain language and variable placeholders. Specifically, you can use double curly brackets to encase predefined variables and prompts for your user. If the text between the brackets matches one of our predefined variables, that section of text will be replaced with its content. For example, `{{highlighted}}` will be replaced by any selected/highlighted text on your current page, `{{innerText}}` will be replaced by the [innerText](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText) of your current page (roughly speaking the hard-coded text of a page), and `{{scratch}}` will be replaced with the contents of your Scratch Pad. If the text within brackets is not a predefined variable, like  `{{What is your name?}}`, it will trigger a user prompt for your user that echo's its content (e.g., they will see a text bubble containing, "What is your name?"). After the user answers, their reply will replace this placeholder (i.e., `{{What is your name?}}`). A list of predefined variables can be found in the sample templates: [Variables "random outcomes" and "time"](#variables-random-outcomes-and-time) and [Variables "from this page"](#variables-from-this-page). 
 
-Use the inputs after a template's name and body to set parameters. If you use the _Post-run Behavior_ to send one template's output to another template, the first templat's output can be read by the second template via the `{{passThrough}}` variable. If this value is valid JSON, you can access individual elements by calling specific keys (e.g., `{{passThrough["key name"]}}`. When using the "DYNAMIC" setting for _Post-run Behavior_ the prompt found in `{{passThrough["next"]}}` will be triggered.
+Use the inputs after a template's name and body to set parameters. If you use the _Post-run Behavior_ to send one template's output to another template, the first template's output can be read by the second template via the `{{passThrough}}` variable. If this value is valid JSON, you can access individual elements by calling specific keys (e.g., `{{passThrough["key name"]}}`. When using the "DYNAMIC" setting for _Post-run Behavior_ the prompt found in `{{passThrough["next"]}}` will be triggered.
 
-For a crash course on how everything fits together, you can read through this set of [sample templates](#sample-tempaltes) below in order. For more detail, read the next section [Prompt Execution](#prompt-execution).
+For a crash course on how everything fits together, you can read through this set of [sample templates](#sample-templates) below in order. For more detail, read the next section [Prompt Execution](#prompt-execution).
 
 Note: You can explore and contribute to our [library of templates](templates) (pre-written template files you can upload here).
 
@@ -51,7 +51,7 @@ TK
 
 TK
 
-## Sample Tempaltes
+## Sample Templates
 
 When reading through templates, you may see comments between `[#` and `#]`. Such comments do not appear in the final prompts and are there to provide notes to template authors, like you. ;)
 
