@@ -157,7 +157,7 @@ Now provide your JSON object:
 ```
 Output Type: `LLM`,  Model: `gpt-3.5-turbo`,  Temperature: `0`,  Max Tokens: `250`,  JSON: `Yes`,  Default Output `Screen only`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
 
-### Translate & reply in orginal language
+### Translate & reply in original language
 ```
 You are helping translate text into English. Here is the text you are to work with:
 
