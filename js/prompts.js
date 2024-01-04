@@ -338,7 +338,11 @@ function choose_prompt(choice) {
       } else {
         if (selectedText.length>0) {
           llm_prompt = llm_prompt.replace(/{{highlighted}}/g, selectedText.replace(/({|})/g, "\\$1")); 
-          llm_prompt = llm_prompt.replace(/{{nSelectedWords}}/g, selectedText.match(/\b(\w+)\b/g).length); 
+          try {
+            llm_prompt = llm_prompt.replace(/{{nSelectedWords}}/g, selectedText.match(/\b(\w+)\b/g).length);             
+          } catch (error) {
+            llm_prompt = llm_prompt.replace(/{{nSelectedWords}}/g, "unknown");    
+          }
         } else {
           llm_prompt = llm_prompt.replace(/{{highlighted}}/g, ""); 
 
@@ -359,7 +363,11 @@ function choose_prompt(choice) {
         } else {
           if (bodyText.length>0) {
             llm_prompt = llm_prompt.replace(/{{innerText}}/g, bodyText.replace(/({|})/g, "\\$1"));
-            llm_prompt = llm_prompt.replace(/{{nWordsOnPage}}/g, bodyText.match(/\b(\w+)\b/g).length);
+            try {
+              llm_prompt = llm_prompt.replace(/{{nWordsOnPage}}/g, bodyText.match(/\b(\w+)\b/g).length);              
+            } catch (error) {
+              llm_prompt = llm_prompt.replace(/{{nWordsOnPage}}/g, "unknown");       
+            }
           } else {
             llm_prompt = llm_prompt.replace(/{{innerText}}/g, "");
             llm_prompt = llm_prompt.replace(/{{nWordsOnPage}}/g, 0);
