@@ -4,7 +4,7 @@ LIT Prompts is a browser extension that generates LLM prompts based on user-auth
 
 # OpenAI-Compatible API Integration
 
-To run your interactions, you'll need to point to the [API](https://en.wikipedia.org/wiki/API) for a [Large Language Model](https://en.wikipedia.org/wiki/Large_language_model) (LLM). You can use an OpenAI endpoint/base (i.e., `https://api.openai.com/v1/chat/completions`) along with an OpenAI API key _**OR you can use ANY endpoint that makes use of the same format!**_ For example, you could download something like [LM Studio](), spin up a local LLM, and point this extension at `localhost` (keeping your data on your computer). Alternatively, you could use a tool like [vLLM](https://docs.vllm.ai/en/latest/index.html) to spin up an OpenAI-compatible API server and point at that. 
+To run your interactions, you'll need to point to the [API](https://en.wikipedia.org/wiki/API) for a [Large Language Model](https://en.wikipedia.org/wiki/Large_language_model) (LLM). You can use an OpenAI endpoint/base (i.e., `https://api.openai.com/v1/chat/completions`) along with an OpenAI API key, _**OR you can use ANY endpoint that makes use of the same format!**_ For example, you could download something like [LM Studio](), spin up a local LLM, and point this extension at `localhost` (keeping your data on your computer). Alternatively, you could use a tool like [vLLM](https://docs.vllm.ai/en/latest/index.html) to spin up an OpenAI-compatible API server and point at that. 
 
 ## Using OpenAI with LIT Prompts
 
@@ -15,7 +15,7 @@ Login to [OpenAI](https://openai.com/), and navigate to the [API documentation](
 1. Select "API keys" from the left menu
 2. Click "+ Create new secret key"
 
-On LIT Prompt's _Templates and Settings_ screen, set your API Base to `https://api.openai.com/v1/chat/completions` and your API Key equal to the value you got above after clicking "+ Create new secret key".
+On LIT Prompt's _Templates & Settings_ screen, set your API Base to `https://api.openai.com/v1/chat/completions` and your API Key equal to the value you got above after clicking "+ Create new secret key".
 
 ## Using LM Studio with LIT Prompts
 
@@ -27,7 +27,7 @@ After opening [LM Studio](https://lmstudio.ai/) and downloading a model/models.
 2. Select your model
 3. Make sure that _Cross-Origin-Resource-Sharing_ is on
 4. Start your server
-5. Copy the url for your server and use that as your API Base on LIT Prompt's _Templates and Settings_ screen (you can leave the API Key blank) 
+5. Copy the url for your server and use that as your API Base on LIT Prompt's _Templates & Settings_ screen (you can leave the API Key blank) 
 
 # Export Interactions to HTML
 
@@ -35,7 +35,7 @@ You can export runnable versions of your interactions to one of two HTML output 
 
 # Prompt Templates
 
-When crafting a template, use a mix of plain language and variable placeholders. Specifically, you can use double curly brackets to encase predefined variables and prompts for your user. If the text between the brackets matches one of our predefined variables, that section of text will be replaced with its content. For example, `{{highlighted}}` will be replaced by any selected/highlighted text on your current page, `{{innerText}}` will be replaced by the [innerText](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText) of your current page (roughly speaking the hard-coded text of a page), and `{{scratch}}` will be replaced with the contents of your Scratch Pad. If the text within brackets is not a predefined variable, like  `{{What is your name?}}`, it will trigger a user prompt for your user that echo's its content (e.g., they will see a text bubble containing, "What is your name?"). After the user answers, their reply will replace this placeholder (i.e., `{{What is your name?}}`). A list of predefined variables can be found in the sample templates: [Variables "random outcomes" and "time"](#variables-random-outcomes-and-time) and [Variables "from this page"](#variables-from-this-page). 
+When crafting a template, use a mix of plain language and variable placeholders. Specifically, you can use double curly brackets to encase predefined variables and prompts for your user. If the text between the brackets matches one of our predefined variables, that section of text will be replaced with its content. For example, `{{highlighted}}` will be replaced by any selected/highlighted text on your current page, `{{innerText}}` will be replaced by the [innerText](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText) of your current page (roughly speaking the hard-coded text of a page), and `{{scratch}}` will be replaced with the contents of your Scratch Pad. If the text within brackets is not a predefined variable, like  `{{What is your name?}}`, it will trigger a user prompt for your user that echo's its content (e.g., a text bubble containing, "What is your name?"). After the user answers, their reply will replace this placeholder (i.e., `{{What is your name?}}`). A list of predefined variables can be found in the sample templates: [Variables "random outcomes" and "time"](#variables-random-outcomes-and-time) and [Variables "from this page"](#variables-from-this-page). 
 
 Use the inputs after a template's name and body to set parameters. If you use the _Post-run Behavior_ to send one template's output to another template, the first template's output can be read by the second template via the `{{passThrough}}` variable. If this value is valid JSON, you can access individual elements by calling specific keys (e.g., `{{passThrough["key name"]}}`. When using the "DYNAMIC" setting for _Post-run Behavior_ the prompt found in `{{passThrough["next"]}}` will be triggered.
 
@@ -53,7 +53,7 @@ When you run a template prompt with the LIT Prompts extension this is what happe
     - replace `{{innerText}}` with the [innerText]() of the active browser tab (roughly speaking the hard-coded text of the page)
 3. If we were able to find highlighted text or read the innerText, we attempt to replace the following placeholders with word counts, where:
     - `{{nSelectedWords}}` is the number of highlighted words; and
-    -`{{nWordsOnPage}}` is the number of words found in the innerText
+    - `{{nWordsOnPage}}` is the number of words found in the innerText
 4. An attempt is made to replace `{{scrtach}}` with the contents of your Scratch Pad
 5. If this template was triggered by a preceding template, we replace `{{passThrough}}` with the whole prompt.
 6. If the content of `{{passThrough}}` is valid JSON, we look for references to individual first-level keys and replace such references with the key's value (e.g., `{{passThrough["next"]}}` would be replaced with the value of the key "next")
@@ -81,15 +81,15 @@ When you run a template prompt with the LIT Prompts extension this is what happe
     - Minute (00-59): `{{minutes2d}}`
     - Second (0-59): `{{seconds}}`
     - Second (00-59): `{{seconds2d}}`
-8. We look for any placeholders that aren't in the list above and prompt the user to provide a value. That is, if there is text encased in double curly brackets and it is not a predefined variable, like `{{What is your name?}}`, it will trigger a user prompt that echo's its content (e.g., they will see a text bubble containing, "What is your name?"). After the user answers, the text of their reply will replace this placeholder (i.e., `{{What is your name?}}`). Note: if such a placeholder shows up multiple times in a single template or in a chain of templates triggering one after the other, the default behavior is to only ask the user to provide a reply once. To override this behavior place an asterisk before the closing brackets (i.e., `*}}`).
-9. After the template has been processed the behavior of your interaction is defined by the parameters found below the template text on _Templates and Settings_.
-    - Output Type: When you run this prompt template, should it echo back the text of the prompt or an LLM's reply?  
-    - Model: What model should be used (e.g. gpt-3.5-turbo).  
-    - Temperature: How "random" should replies be (0-1), where 0 is very predictable and 1 is the most unpredictable.  
-    - Max Tokens: Max number of tokens to include in your answer. 1 token ~= 1.7 words. Smaller answers are quicker (and less expensive).  
-    - JSON: If your model supports JSON Mode, we will turn on JSON Mode, if not, we will alert you when output isn't proper JSON.
-    - Output To: Decide where output should go (e.g., to the screen or the screen and the clipboard). 
-    - Post-run Behavior: After this prompt template is run, what next? Should we stop, save the output to a file, chat, or trigger another prompt template? Note: if you choose DYNAMIC, this will trigger the prompt found in `{{passThrough["next"]}}`. See above for a discussion of variables.
+8. We look for any placeholders that aren't in the list above and prompt the user to provide a value. That is, if there is text encased in double curly brackets and it is not a predefined variable, like `{{What is your name?}}`, it will trigger a user prompt that echo's its content (e.g., a text bubble containing, "What is your name?"). After the user answers, the text of their reply will replace this placeholder (i.e., `{{What is your name?}}`). Note: if such a placeholder shows up multiple times in a single template or in a chain of templates triggering one after the other, the default behavior is to only ask the user to provide a reply once. To override this behavior place an asterisk before the closing brackets (i.e., `*}}`).
+9. After the template has been processed the behavior of your interaction is defined by the parameters found below the template text on _Templates & Settings_.
+    - **Output Type:** When you run this prompt template, should it echo back the text of the prompt or an LLM's reply?  
+    - **Model:** What model should be used (e.g. gpt-3.5-turbo). (N/A if Output Type is Prompt)
+    - **Temperature:** How "random" should replies be (0-1), where 0 is very predictable and 1 is the most unpredictable. (N/A if Output Type is Prompt)
+    - **Max Tokens:** Max number of tokens to include in your answer. 1 token ~= 1.7 words. Smaller answers are quicker (and less expensive). (N/A if Output Type is Prompt) 
+    - **JSON:** If your model supports JSON Mode, we will turn on JSON Mode, if not, we will alert you when output isn't proper JSON.
+    - **Output To:** Decide where output should go (e.g., to the screen or the screen and the clipboard). 
+    - **Post-run Behavior:** After this prompt template is run, what next? Should we stop, save the output to a file, chat, or trigger another prompt template? Note: if you choose DYNAMIC, this will trigger the prompt found in `{{passThrough["next"]}}`. See above for a discussion of variables.
     - Hide Button: Hide this template's button from the main list of interaction buttons.
 
 ## Trust and Safety
@@ -97,7 +97,7 @@ When you run a template prompt with the LIT Prompts extension this is what happe
 Here is a non-exhaustive list of trust and safety issues you should consider when using LLMs:
 
 1. Their potential to perpetuate bias / produce output that is somehow wrong
-2. Their potential for data leakage (the inadvertent exposing sensitive info)
+2. Their potential for data leakage (the inadvertent exposing of sensitive info)
 3. The risks that come with running unknown "code"
 
 It's also important to note that LIT Prompts is a wrapper for LLMs (i.e., one can use it to access LLMs we didn't build). Different models will have different behaviors, and different providers will have different policies surrounding data handling. You should research these when choosing a model with an eye on how these differences will inform 1 and 2 above. You can see some introductory discussion of 1 in the first 20 min of [this video](https://www.youtube.com/watch?v=9rBFAZSh1Wc). As for 3, consider the fact that prompts are just normal text. This text acts a code, shaping the response you get when providing it to an LLM. Consequently, if you create a template that takes in unknown text (e.g., the text of a webpage you just visited), there's a chance that text will override or effect your LLM's output in unexpected ways. See [prompt injection](https://en.wikipedia.org/wiki/Prompt_engineering#Prompt_injection).
