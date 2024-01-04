@@ -625,7 +625,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 (async () => {
-    spinJS = await loadFile('js/spin.min.js');
+    spinJS = await loadFile('js/spin.js');
     functionsJS = await loadFile('js/functions.js');
     promptsJS = await loadFile('js/prompts.js');
     popupJS = await loadFile('js/popup_exported.js');
@@ -637,7 +637,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function build_export() {
     fileText = popupHTML
     fileText = fileText.replace(`</title>`,`</title>\n<script>\n\nlocalStorage.setItem('templates',JSON.stringify(`+localStorage.templates+`));\n`);
-    fileText = fileText.replace(`<script src="js/spin.min.js"></script>`,`\n`+spinJS)
+    fileText = fileText.replace(`<script src="js/spin.js"></script>`,`\n`+spinJS)
     fileText = fileText.replace(`<script src="js/functions.js"></script>`,`\n`+functionsJS)
     fileText = fileText.replace(`<script src="js/prompts.js"></script>`,`\n`+promptsJS)
     fileText = fileText.replace(`<script src="js/popup.js"></script>`,`\n`+popupJS)
@@ -658,7 +658,7 @@ function build_export() {
 function build_export_w_scrtach() {
     fileText = popupHTML
     fileText = fileText.replace(`</title>`,`</title>\n<script>\n\nlocalStorage.setItem('templates',JSON.stringify(`+localStorage.templates+`));\n`);
-    fileText = fileText.replace(`<script src="js/spin.min.js"></script>`,spinJS)
+    fileText = fileText.replace(`<script src="js/spin.js"></script>`,spinJS)
     fileText = fileText.replace(`<script src="js/functions.js"></script>`,functionsJS)
     fileText = fileText.replace(`<script src="js/prompts.js"></script>`,promptsJS)
     fileText = fileText.replace(`<script src="js/popup.js"></script>`,popupJS)
