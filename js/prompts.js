@@ -679,7 +679,7 @@ async function openai_call(prompt_text) {
             behavior="stop"
             //LLM_text += "\n"+error            
             after_build(LLM_text);
-            //FOR EXPORT: document.getElementById("restartButton").remove(); 
+            //FOR EXPORT: document.getElementById('restartButton').style.display='none';
             //FOR EXPORT: document.getElementById('credentials').style.display='block';
             //FOR EXPORT: document.getElementById('api_base').value = localStorage.api_base || "https://api.openai.com/v1/chat/completions";
             //FOR EXPORT: document.getElementById('api_key').value = localStorage.api_key || "";
@@ -691,7 +691,7 @@ async function openai_call(prompt_text) {
           behavior="stop"
           //LLM_text += "\n"+error            
           after_build(LLM_text)
-          //FOR EXPORT: document.getElementById("restartButton").remove(); 
+          //FOR EXPORT: document.getElementById('restartButton').style.display='none';
           //FOR EXPORT: document.getElementById('credentials').style.display='block';
           //FOR EXPORT: document.getElementById('api_base').value = localStorage.api_base || "https://api.openai.com/v1/chat/completions";
           //FOR EXPORT: document.getElementById('api_key').value = localStorage.api_key || "";

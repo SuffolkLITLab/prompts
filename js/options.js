@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // delete prompts
     var deletePrompts = document.getElementById('deletePrompts');
     document.getElementById('deletePrompts').addEventListener('click', function() {
-        if (confirm('This will delete the current prompts. Choose "OK" to continue or "Cancel" to keep things as they are.') == true) {
+        if (confirm('This will delete the current templates. Choose "OK" to continue or "Cancel" to keep things as they are.') == true) {
             localStorage.setItem('templates', "{}"); // Set to ""
             loadPrompts(); // Reload the prompts from localStorage
         }
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Restore default prompts
     var restoreDefaults = document.getElementById('restoreDefaults');
     document.getElementById('restoreDefaults').addEventListener('click', function() {
-        if (confirm('This will replace your current prompts with the default values. Choose "OK" to continue or "Cancel" to keep things as they are.') == true) {
+        if (confirm('This will replace your current templates with the default values. Choose "OK" to continue or "Cancel" to keep things as they are.') == true) {
             localStorage.setItem('templates', localStorage.default_templates); // Set to default prompts
             loadPrompts(); // Reload the prompts from localStorage
         }
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Upload prompts from a file
     var uploadPrompts = document.getElementById('uploadPrompts');
     document.getElementById('uploadPrompts').addEventListener('click', function() {
-        if (confirm('This will replace your current prompts with those in the file you upload. Choose "OK" to continue or "Cancel" to keep things as they are.') == true) {
+        if (confirm('This will replace your current templates with those in the file you upload. Choose "OK" to continue or "Cancel" to keep things as they are.') == true) {
             document.getElementById('fileInput').click(); // Trigger file input
         }
     });
@@ -273,7 +273,7 @@ function createPromptElement(promptName, template, selectedBehavior) {
     const maxTokensInput = createParameterInput('Max Tokens', 'max_tokens', promptId, 'number', template.max_tokens);
     const outputTypeInput = createParameterSelect('Output Type', 'output', promptId, ['Prompt', 'LLM'], template.output);
     const jsonModeInput = createParameterSelect('JSON', 'json_mode', promptId, ['No', 'Yes'], template.json_mode);
-    const outputDestinationInput = createParameterSelect('Default Output', 'output_to', promptId, ['Screen only', 'Screen + clipboard', 'Screen + append to scratch pad', 'Screen + replace scratch pad','Hidden','Hidden + clipboard', 'Hidden + append to scratch pad', 'Hidden + replace scratch pad'], template.output_to);
+    const outputDestinationInput = createParameterSelect('Output To', 'output_to', promptId, ['Screen only', 'Screen + clipboard', 'Screen + append to scratch pad', 'Screen + replace scratch pad','Hidden','Hidden + clipboard', 'Hidden + append to scratch pad', 'Hidden + replace scratch pad'], template.output_to);
     
     const postTemplateBehaviorInput = createParameterSelect('Post-run Behavior', 'behavior', promptId, getPromptNames(), selectedBehavior);
 

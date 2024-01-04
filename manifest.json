@@ -19,7 +19,8 @@
     "permissions": [
         "activeTab",
         "storage",
-        "scripting"
+        "scripting",
+        "clipboardWrite"
     ],
     "host_permissions": [
         "http://*/*",
