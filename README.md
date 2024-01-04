@@ -39,7 +39,7 @@ When crafting a template, use a mix of plain language and variable placeholders.
 
 Use the inputs after a template's name and body to set parameters. If you use the _Post-run Behavior_ to send one template's output to another template, the first templat's output can be read by the second template via the `{{passThrough}}` variable. If this value is valid JSON, you can access individual elements by calling specific keys (e.g., `{{passThrough["key name"]}}`. When using the "DYNAMIC" setting for _Post-run Behavior_ the prompt found in `{{passThrough["next"]}}` will be triggered.
 
-For a crash course on how everything fits together, you can read through this set of [sample templates](#sample-tempaltes) below in order. When looking at some templates, you will see comments between `[#` and `#]`. Such comments will not appear in the final prompts and are there to provide notes to template authors. For more detail, read the next section [Prompt Execution](#prompt-execution).
+For a crash course on how everything fits together, you can read through this set of [sample templates](#sample-tempaltes) below in order. For more detail, read the next section [Prompt Execution](#prompt-execution).
 
 Note: You can explore and contribute to our [library of templates](templates) (pre-written template files you can upload here).
 
@@ -52,6 +52,8 @@ TK
 TK
 
 ## Sample Tempaltes
+
+When reading through templates, you may see comments between `[#` and `#]`. Such comments do not appear in the final prompts and are there to provide notes to template authors, like you. ;)
 
 ### Summarize & question this page
 ```
