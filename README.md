@@ -75,11 +75,7 @@ Output Type: `LLM`,  Model: `gpt-3.5-turbo-16k`,  Temperature: `0.7`,  Max Token
 
 ### Define selected word/phrase
 ```
-Define the following word/phrase: 
-
-{{highlighted}}
-
-Follow your definition with two carriage returns. [# Here we've set the Output To equal to Screen + append to scratch pad which means that the LLM's output will be appended to the contents of your Scratch Pad, which can be accessed from the Popup by clicking the "Scratch Pad" button. We assuming you'll be looking up more than one thing. So to make sure subsequent definitions don't all show up on one line, we've asked the LLM to add two carriage returns after each definition. #]
+Define the following word/phrase: {{highlighted}}[# Here we've set the Output To equal to Screen + append to scratch pad which means that the LLM's output will be appended to the contents of your Scratch Pad, which can be accessed from the Popup by clicking the "Scratch Pad" button. #]
 
 ```
 Output Type: `LLM`,  Model: `gpt-3.5-turbo`,  Temperature: `0`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen + append to scratch pad`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
