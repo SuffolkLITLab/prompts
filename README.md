@@ -209,6 +209,9 @@ Now provide your JSON object:
 Output Type: `LLM`,  Model: `gpt-3.5-turbo`,  Temperature: `0`,  Max Tokens: `300`,  JSON: `Yes`,  Output To `Screen only`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
 
 ### Translate & reply in original language
+
+If you're looking for some non-English text, [here's some](https://www.lemonde.fr/).
+
 ```
 [# This template's "big trick" is that the Post-run Behavior is set to "display translation and prompt," which is the name of another template. This means that after this prompt is run through an LLM, it will trigger "display translation and prompt," and pass to it this template's output. Because the Output To is set to Hidden, however, the user will not see this structured data. #]You are helping translate text into English. Here is the text you are to work with:
 
