@@ -1,10 +1,24 @@
 # LIT Prompts
 
-LIT Prompts is a browser extension that generates LLM prompts based on user-authored templates. It is a project of Suffolk University Law School's [Legal Innovation & Technology (LIT) Lab](https://suffolklitlab.org/). It was designed to help students explore [prompt engineering](https://suffolklitlab.org/). Users can create and save prompt templates for use within the extension. These templates can use data from your active browser window (e.g., selected text or the whole text of a webpage) as well as text input provided by you. They can also feed into each other, allowing one to create complex interactions. 
-
 Get the FireFox Add-on here: https://addons.mozilla.org/en-US/firefox/addon/lit-prompts/
 
-And if you like videos, here's a ~7 min [video](https://www.youtube.com/watch?v=Ql8aXGvLBGU) showing how to use the extension:
+LIT Prompts is a browser extension that generates LLM prompts based on user-authored templates. It is a project of Suffolk University Law School's [Legal Innovation & Technology (LIT) Lab](https://suffolklitlab.org/). It was designed to help students explore [prompt engineering](https://suffolklitlab.org/). Users can create and save prompt templates for use within the extension. These templates can use data from your active browser window (e.g., selected text or the whole text of a webpage) as well as text input provided by you. They can also feed into each other, allowing one to create complex interactions. For example, you can make interactions that:
+
+- Summarize and ask questions of a webpage (e.g., What are the main conclusions of this article? What did so and so say about this or that?). [sample](#summarize--question-this-page)
+- Draft an email reply responding to selected text. Then place it in your clipboard ready to paste into an email. [sample](#politely-decline-an-email-selected-text)
+- Define a selected word or phrase, appending the definition to your local Scratch Pad. [sample](#define-selected-wordphrase)
+- Save contents of Scratch Pad to a file. [sample](#save-scratch-pad-to-file)
+- Summarize and ask questions of text in the Scratch Pad (e.g., you could cut-and-paste content into the Scratch Pad when it's not available on a webpage). [sample](#summarize--question-scratch-pad)
+- Return a structured representation of a string's sentence structure (i.e., "diagram" a sentence in JSON). [sample](#diagram-selected-sentence)
+- Translate selected text from one language into another. Then draft a reply in the original language. [sample](#translate--reply-in-original-language)
+- Flip a virtual coin and write a short poem based on the outcome. [sample](#coin-flip-to-poem)
+- Shorten selected text. [sample](#shorten-selected-text)
+- Expand/build on selected text (i.e., have an LLM ask you questions to flesh out some text). [sample](#expand-selected-short-text)
+- BS with the LLM of your choice. [sample](#bs-with-a-bot)
+
+Note: you can use the template feature without engaging an LLM to produce simple fill-in-the blank output (i.e., traditional form letters). [sample](#generic-form-letter-no-llm)
+
+Here's a ~7 min [video](https://www.youtube.com/watch?v=Ql8aXGvLBGU) showing how to use the extension:
 
 [![YouTube Preview Image](docs/images/yt_addon_preview.png)](https://www.youtube.com/watch?v=Ql8aXGvLBGU)
 
