@@ -4,6 +4,10 @@ LIT Prompts is a browser extension that generates LLM prompts based on user-auth
 
 Get the FireFox Add-on here: https://addons.mozilla.org/en-US/firefox/addon/lit-prompts/
 
+And if you like videos, here's a ~7 min [video](https://www.youtube.com/watch?v=Ql8aXGvLBGU) showing how to use the extension (click the preview image).
+
+[![YouTube Preview Image](docs/images/yt_addon_preview.png)](https://www.youtube.com/watch?v=Ql8aXGvLBGU)
+
 # OpenAI-Compatible API Integration
 
 To run your interactions, you'll need to point to the [API](https://en.wikipedia.org/wiki/API) for a [Large Language Model](https://en.wikipedia.org/wiki/Large_language_model) (LLM). You can use an OpenAI endpoint/base (i.e., `https://api.openai.com/v1/chat/completions`) along with an OpenAI API key, _**OR you can use ANY endpoint that makes use of the same format!**_ For example, you could download something like [LM Studio](), spin up a local LLM, and point this extension at `localhost` (keeping your data on your computer). Alternatively, you could use a tool like [vLLM](https://docs.vllm.ai/en/latest/index.html) to spin up an OpenAI-compatible API server and point at that. 
