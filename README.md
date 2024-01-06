@@ -4,7 +4,7 @@ LIT Prompts is a browser extension that generates LLM prompts based on user-auth
 
 Get the FireFox Add-on here: https://addons.mozilla.org/en-US/firefox/addon/lit-prompts/
 
-And if you like videos, here's a ~7 min [video](https://www.youtube.com/watch?v=Ql8aXGvLBGU) showing how to use the extension (click the preview image).
+And if you like videos, here's a ~7 min [video](https://www.youtube.com/watch?v=Ql8aXGvLBGU) showing how to use the extension:
 
 [![YouTube Preview Image](docs/images/yt_addon_preview.png)](https://www.youtube.com/watch?v=Ql8aXGvLBGU)
 
@@ -14,7 +14,7 @@ To run your interactions, you'll need to point to the [API](https://en.wikipedia
 
 ## Using OpenAI with LIT Prompts
 
-Login to [OpenAI](https://openai.com/), and navigate to the [API documentation](https://platform.openai.com/docs/). Note: when you create a new account you are given a limited API credit. If you created an account some time ago these may have expired. If your credits have expired, you will need to enter a [billing method](https://platform.openai.com/account/billing/overview) before you can use the API. 
+Login to [OpenAI](https://openai.com/), and navigate to the [API documentation](https://platform.openai.com/docs/). Note: when you create a new account you are given a limited API credit. If you created an account some time ago these may have expired. If your credits have expired, you will need to enter a [billing method](https://platform.openai.com/account/billing/overview) before you can use the API. Note: these steps are also shown in the [video](https://www.youtube.com/watch?v=Ql8aXGvLBGU) above.
 
 ![Screen shot of OpenAI API Keys page, showing where to click as described below](docs/images/OpenAI_keys.png)
 
