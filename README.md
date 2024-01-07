@@ -4,19 +4,19 @@ Get the FireFox Add-on here: https://addons.mozilla.org/en-US/firefox/addon/lit-
 
 LIT Prompts is a browser extension that generates LLM prompts based on user-authored templates. It is a project of Suffolk University Law School's [Legal Innovation & Technology (LIT) Lab](https://suffolklitlab.org/). It was designed to help students explore [prompt engineering](https://suffolklitlab.org/). Users can create and save prompt templates for use within the extension. These templates can use data from your active browser window (e.g., selected text or the whole text of a webpage) as well as text input provided by you. They can also feed into each other, allowing one to create complex interactions. For example, you can make interactions that:
 
-- Summarize and ask questions of a webpage (e.g., What are the main conclusions of this article? What did so and so say about this or that?). [sample](#summarize--question-this-page)
-- Draft an email reply responding to selected text. Then place it in your clipboard ready to paste into an email. [sample](#politely-decline-an-email-selected-text)
-- Define a selected word or phrase, appending the definition to your local Scratch Pad. [sample](#define-selected-wordphrase)
-- Save contents of Scratch Pad to a file. [sample](#save-scratch-pad-to-file)
-- Summarize and ask questions of text in the Scratch Pad (e.g., you could cut-and-paste content into the Scratch Pad when it's not available on a webpage). [sample](#summarize--question-scratch-pad)
-- Return a structured representation of a string's sentence structure (i.e., "diagram" a sentence in JSON). [sample](#diagram-selected-sentence)
-- Translate selected text from one language into another. Then draft a reply in the original language. [sample](#translate--reply-in-original-language)
-- Flip a virtual coin and write a short poem based on the outcome. [sample](#coin-flip-to-poem)
-- Shorten selected text. [sample](#shorten-selected-text)
-- Expand/build on selected text (i.e., have an LLM ask you questions to flesh out some text). [sample](#expand-selected-short-text)
-- BS with the LLM of your choice. [sample](#bs-with-a-bot)
+- Summarize and ask questions of a webpage (e.g., What are the main conclusions of this article? What did so and so say about this or that?). [sample template](#summarize--question-this-page)
+- Draft an email reply responding to selected text. Then place it in your clipboard ready to paste into an email. [sample template](#politely-decline-an-email-selected-text)
+- Define a selected word or phrase, appending the definition to your local Scratch Pad. [sample template](#define-selected-wordphrase)
+- Save contents of Scratch Pad to a file. [sample template](#save-scratch-pad-to-file)
+- Summarize and ask questions of text in the Scratch Pad (e.g., you could cut-and-paste content into the Scratch Pad when it's not available on a webpage). [sample template](#summarize--question-scratch-pad)
+- Return a structured representation of a string's sentence structure (i.e., "diagram" a sentence in JSON). [sample template](#diagram-selected-sentence)
+- Translate selected text from one language into another. Then draft a reply in the original language. [sample template](#translate--reply-in-original-language)
+- Flip a virtual coin and write a short poem based on the outcome. [sample template](#coin-flip-to-poem)
+- Shorten selected text. [sample template](#shorten-selected-text)
+- Expand/build on selected text (i.e., have an LLM ask you questions to flesh out some text). [sample template](#expand-selected-short-text)
+- BS with the LLM of your choice. [sample template](#bs-with-a-bot)
 
-Note: you can use the template feature without engaging an LLM to produce simple fill-in-the blank output (i.e., traditional form letters). [sample](#generic-form-letter-no-llm)
+Note: you can use the template feature without engaging an LLM to produce simple fill-in-the blank output (i.e., traditional form letters). [sample template](#generic-form-letter-no-llm)
 
 Here's a ~7 min [video](https://www.youtube.com/watch?v=Ql8aXGvLBGU) showing how to use the extension:
 
@@ -25,6 +25,8 @@ Here's a ~7 min [video](https://www.youtube.com/watch?v=Ql8aXGvLBGU) showing how
 # OpenAI-Compatible API Integration
 
 To run your interactions, you'll need to point to the [API](https://en.wikipedia.org/wiki/API) for a [Large Language Model](https://en.wikipedia.org/wiki/Large_language_model) (LLM). You can use an OpenAI endpoint/base (i.e., `https://api.openai.com/v1/chat/completions`) along with an OpenAI API key, _**OR you can use ANY endpoint that makes use of the same format!**_ For example, you could download something like [LM Studio](), spin up a local LLM, and point this extension at `localhost` (keeping your data on your computer). Alternatively, you could use a tool like [vLLM](https://docs.vllm.ai/en/latest/index.html) to spin up an OpenAI-compatible API server and point at that. 
+
+[jump to top](#lit-prompts)
 
 ## Using OpenAI with LIT Prompts
 
@@ -36,6 +38,8 @@ Login to [OpenAI](https://openai.com/), and navigate to the [API documentation](
 2. Click "+ Create new secret key"
 
 On LIT Prompt's _Templates & Settings_ screen, set your API Base to `https://api.openai.com/v1/chat/completions` and your API Key equal to the value you got above after clicking "+ Create new secret key".
+
+[jump to top](#lit-prompts)
 
 ## Using LM Studio with LIT Prompts
 
@@ -49,9 +53,13 @@ After opening [LM Studio](https://lmstudio.ai/) and downloading a model/models.
 4. Start your server
 5. Copy the url for your server and use that as your API Base on LIT Prompt's _Templates & Settings_ screen (you can leave the API Key blank) 
 
+[jump to top](#lit-prompts)
+
 # Export Interactions to HTML
 
 You can export runnable versions of your interactions to one of two HTML output types: (1) a page that replicates this extension's "popup," the window with buttons that appears when you click the extension; or (2) a page that replicates both the "popup" and the "Scratch Pad." See the extension's _Templates & Settings_ screen for details. 
+
+[jump to top](#lit-prompts)
 
 # Prompt Templates
 
@@ -62,6 +70,8 @@ Use the inputs after a template's name and body to set parameters. If you use th
 For a crash course on how everything fits together, you can read through this set of [sample templates](#sample-templates) below in order. For more detail, read the next section [Prompt Execution](#prompt-execution).
 
 Note: You can explore and contribute to our [library of templates](templates) (pre-written template files you can upload here).
+
+[jump to top](#lit-prompts)
 
 ## Prompt Execution 
 
@@ -112,6 +122,8 @@ When you run a template prompt with the LIT Prompts extension this is what happe
     - **Post-run Behavior:** After this prompt template is run, what next? Should we stop, save the output to a file, chat, or trigger another prompt template? Note: if you choose DYNAMIC, this will trigger the prompt found in `{{passThrough["next"]}}`. See above for a discussion of variables.
     - Hide Button: Hide this template's button from the main list of interaction buttons.
 
+[jump to top](#lit-prompts)
+
 ## Trust and Safety
 
 Here is a non-exhaustive list of trust and safety issues you should consider when using LLMs:
@@ -122,9 +134,13 @@ Here is a non-exhaustive list of trust and safety issues you should consider whe
 
 It's also important to note that LIT Prompts is a wrapper for LLMs (i.e., one can use it to access LLMs we didn't build). Different models will have different behaviors, and different providers will have different policies surrounding data handling. You should research these when choosing a model with an eye on how these differences will inform 1 and 2 above. You can see some introductory discussion of 1 in the first 20 min of [this video](https://www.youtube.com/watch?v=9rBFAZSh1Wc). As for 3, consider the fact that prompts are just normal text. This text acts a code, shaping the response you get when providing it to an LLM. Consequently, if you create a template that takes in unknown text (e.g., the text of a webpage you just visited), there's a chance that text will override or effect your LLM's output in unexpected ways. See [prompt injection](https://en.wikipedia.org/wiki/Prompt_engineering#Prompt_injection).
 
+[jump to top](#lit-prompts)
+
 ## Sample Templates
 
 When reading through templates, you may see comments between `[#` and `#]`. Such comments do not appear in the final prompts and are there to provide notes to template authors, like you. ;)
+
+[jump to top](#lit-prompts)
 
 ### Summarize & question this page
 ```
@@ -135,6 +151,8 @@ Provide a short 150 word summary of the above text. If asked any follow-up quest
 ```
 Output Type: `LLM`,  Model: `gpt-3.5-turbo-16k`,  Temperature: `0`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen only`,  Post-run Behavior: `CHAT`,  Hide Button: `unchecked`  
 
+[jump to top](#lit-prompts)
+
 ### Politely decline an email (selected text)
 ```
 {{highlighted}} [# FYI, the highlighted variable will be replaced with any text you have highlighted/selected when you click the extension's popup, and because Output To is set to Screen + clipboard, the LLMs output will be ready to paste in an email after the interaction runs. #]
@@ -144,6 +162,8 @@ The above is an email. Draft a brief and professional reply politely declining i
 ```
 Output Type: `LLM`,  Model: `gpt-3.5-turbo-16k`,  Temperature: `0.7`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen + clipboard`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
 
+[jump to top](#lit-prompts)
+
 ### Define selected word/phrase
 ```
 Define the following word/phrase: {{highlighted}}[# Here we've set the Output To equal to Screen + append to scratch pad which means that the LLM's output will be appended to the contents of your Scratch Pad, which can be accessed from the Popup by clicking the "Scratch Pad" button. #]
@@ -151,11 +171,15 @@ Define the following word/phrase: {{highlighted}}[# Here we've set the Output To
 ```
 Output Type: `LLM`,  Model: `gpt-3.5-turbo`,  Temperature: `0`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen + append to scratch pad`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
 
+[jump to top](#lit-prompts)
+
 ### Save Scratch Pad to file
 ```
 {{scratch}} [# The scratch variable will be replaced with the content of your Scratch Pad, which can be accessed from the Popup by clicking the "Scratch Pad" button. Since we have set the Output Type to Prompt, this prompt will not be sent to an LLM, but having set Post-run Behavior to SAVE TO FILE, it will trigger your browser's save to file action. #]
 ```
 Output Type: `Prompt`,  Model: `n/a`,  Temperature: `n/a`,  Max Tokens: `n/a`,  JSON: `No`,  Output To `Screen only`,  Post-run Behavior: `SAVE TO FILE`,  Hide Button: `unchecked`  
+
+[jump to top](#lit-prompts)
 
 ### Summarize & question Scratch Pad
 ```
@@ -165,6 +189,8 @@ Provide a short 150 word summary of the above text. If asked any follow-up quest
 
 ```
 Output Type: `LLM`,  Model: `gpt-3.5-turbo-16k`,  Temperature: `0`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen only`,  Post-run Behavior: `CHAT`,  Hide Button: `unchecked`  
+
+[jump to top](#lit-prompts)
 
 ### "Diagram" selected sentence
 ```
@@ -228,6 +254,8 @@ Now provide your JSON object:
 ```
 Output Type: `LLM`,  Model: `gpt-3.5-turbo`,  Temperature: `0`,  Max Tokens: `300`,  JSON: `Yes`,  Output To `Screen only`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
 
+[jump to top](#lit-prompts)
+
 ### Translate & reply in original language
 
 If you're looking for some non-English text, [here's some](https://www.lemonde.fr/).
@@ -244,6 +272,8 @@ Now return the object:
 ```
 Output Type: `LLM`,  Model: `gpt-3.5-turbo-16k`,  Temperature: `0`,  Max Tokens: `250`,  JSON: `Yes`,  Output To `Hidden`,  Post-run Behavior: `display translation and prompt`,  Hide Button: `unchecked`  
 
+[jump to top](#lit-prompts)
+
 ### display translation and prompt
 ```
 Translate the following text into {{passThrough["language"]}}. Here's the text to translate: 
@@ -252,6 +282,8 @@ Translate the following text into {{passThrough["language"]}}. Here's the text t
 
 ```
 Output Type: `LLM`,  Model: `gpt-3.5-turbo`,  Temperature: `0`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen + clipboard`,  Post-run Behavior: `FULL STOP`,  Hide Button: `checked`  
+
+[jump to top](#lit-prompts)
 
 ### Coin flip to poem
 ```
@@ -264,6 +296,7 @@ Now give me your response/poem:
 ```
 Output Type: `LLM`,  Model: `gpt-3.5-turbo`,  Temperature: `0.9`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen only`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
 
+[jump to top](#lit-prompts)
 
 ### Shorten selected text
 ```
@@ -273,6 +306,8 @@ You're a helpful editor and you're going to help trim some text. I know it's alr
 
 ```
 Output Type: `LLM`,  Model: `gpt-3.5-turbo`,  Temperature: `0.7`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen + clipboard`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
+
+[jump to top](#lit-prompts)
 
 ### Expand selected (short) text
 ```
@@ -285,6 +320,8 @@ Think about how your character would respond and craft an appropriate reply. You
 ```
 Output Type: `LLM`,  Model: `gpt-3.5-turbo-1106`,  Temperature: `0.7`,  Max Tokens: `250`,  JSON: `Yes`,  Output To `Hidden`,  Post-run Behavior: `Role Play 1`,  Hide Button: `unchecked`  
 
+[jump to top](#lit-prompts)
+
 ### Role Play 1
 ```
 {{passThrough["transcript"]}}
@@ -293,6 +330,8 @@ WRITER: {{{{passThrough["reply"]}}*}} [# Here we've encased {{passThrough["reply
 
 ```
 Output Type: `Prompt`,  Model: `n/a`,  Temperature: `n/a`,  Max Tokens: `n/a`,  JSON: `No`,  Output To `Hidden + replace scratch pad`,  Post-run Behavior: `Role Play 2`,  Hide Button: `checked`  
+
+[jump to top](#lit-prompts)
 
 ### Role Play 2
 ```
@@ -305,6 +344,8 @@ Think about how your character would respond and craft an appropriate reply. You
 ```
 Output Type: `LLM`,  Model: `gpt-3.5-turbo-1106`,  Temperature: `0.7`,  Max Tokens: `2000`,  JSON: `Yes`,  Output To `Hidden`,  Post-run Behavior: `Role Play 3`,  Hide Button: `checked`  
 
+[jump to top](#lit-prompts)
+
 ### Role Play 3
 ```
 YOU: {{passThrough["reply"]}}
@@ -312,6 +353,8 @@ WRITER: {{{{passThrough["reply"]}}*}} [# Here unlike "Role Play 1" we append to,
 
 ```
 Output Type: `Prompt`,  Model: `n/a`,  Temperature: `n/a`,  Max Tokens: `n/a`,  JSON: `No`,  Output To `Hidden + append to scratch`,  Post-run Behavior: `Role Play 4`,  Hide Button: `checked`  
+
+[jump to top](#lit-prompts)
 
 ### Role Play 4
 ```
@@ -324,6 +367,8 @@ You will provide a JSON object in response to the above with a key named `next`.
 ```
 Output Type: `LLM`,  Model: `gpt-3.5-turbo-1106`,  Temperature: `0.7`,  Max Tokens: `250`,  JSON: `Yes`,  Output To `Hidden`,  Post-run Behavior: `DYNAMIC`,  Hide Button: `checked`  
 
+[jump to top](#lit-prompts)
+
 ### Role Play 5
 ```
 [# Having collected more context from the user, we're now ready to produce some new text and copy that to the clipboard (Output To = Screen + clipboard). #]You are a helpful writing assistant. You've just had a conversation with a writer about some copy they're working on, and your task is to take what you learned from that conversation and rewrite the original copy such that its about 20% longer. Here's the text of your conversation. The writer began by reading the copy they have so far.
@@ -335,12 +380,16 @@ Use what you learned above to rewrite the original copy, adding details learned 
 ```
 Output Type: `LLM`,  Model: `gpt-3.5-turbo-16k`,  Temperature: `0.7`,  Max Tokens: `4000`,  JSON: `No`,  Output To `Screen + clipboard`,  Post-run Behavior: `FULL STOP`,  Hide Button: `checked` 
 
+[jump to top](#lit-prompts)
+
 ### BS with a "bot"
 ```
 {{Yes?}} [# {{Yes?}} isn't a predefined variable. So, the user will be presented with a text input, and since Post-run Behavior is set to CHAT, this ends up being a plain old chat with an LLM. #]
 
 ```
 Output Type: `LLM`,  Model: `gpt-3.5-turbo-16k`,  Temperature: `0.7`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen only`,  Post-run Behavior: `CHAT`,  Hide Button: `unchecked`  
+
+[jump to top](#lit-prompts)
 
 ### Generic form letter (no LLM)
 ```
@@ -354,6 +403,8 @@ Sincerely,
 {{What's your name?}} [# Note: The user is only presented with "What's your name?" once because the default behavior is not to repeat user prompts. If you added an asterisk before the closing brackets, however, it would force user input. #]
 ```
 Output Type: `Prompt`,  Model: `n/a`,  Temperature: `n/a`,  Max Tokens: `n/a`,  JSON: `No`,  Output To `Screen + clipboard`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
+
+[jump to top](#lit-prompts)
 
 ### Variables "random outcomes" and "time"
 ```
@@ -392,6 +443,8 @@ Browser Date and Time:
 It is {{hours}}:{{minutes2d}}:{{seconds2d}} {{ampm}} on {{DayOfWeek}}, {{Month}} {{day}}, {{year}}
 ```
 Output Type: `Prompt`,  Model: `n/a`,  Temperature: `n/a`,  Max Tokens: `n/a`,  JSON: `No`,  Output To `Screen only`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
+
+[jump to top](#lit-prompts)
 
 ### Variables "from this page"
 ```
