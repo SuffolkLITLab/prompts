@@ -459,3 +459,5 @@ Page Data:
 
 ```
 Output Type: `Prompt`,  Model: `n/a`,  Temperature: `n/a`,  Max Tokens: `n/a`,  JSON: `No`,  Output To `Screen only`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
+
+[jump to top](#lit-prompts)
