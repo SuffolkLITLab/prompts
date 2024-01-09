@@ -461,3 +461,9 @@ Page Data:
 Output Type: `Prompt`,  Model: `n/a`,  Temperature: `n/a`,  Max Tokens: `n/a`,  JSON: `No`,  Output To `Screen only`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
 
 [jump to top](#lit-prompts)
+
+# Privacy Policy
+
+This extension does not share user data with its authors. However, this extension is capable of submitting data to OpenAI-compatible API services. It only sends data to endpoints defined by the user. One can use an OpenAI endpoint (i.e., https://api.openai.com/v1/chat/completions), OR one can use ANY endpoint that makes use of the same format. For example, users could download something like LM Studio, spin up a local LLM, and point this extension at localhost (keeping their data on their computer). Alternatively, they could use a tool like vLLM to spin up an OpenAI-compatible API server and point at that. Consequently, if users make use of an API provider, information they send using this extension is subject to that provider's privacy policy.
+
+[jump to top](#lit-prompts)
