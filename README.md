@@ -25,8 +25,6 @@ instead of
   },
 ``` 
 
-It also includes `tabs` under `"permissions"` 
-
 ## get_selection.js 
 
 Renamed the `getSelection` function to `getSelectionFromPage` to avoid conflict with `window.getSelection()`

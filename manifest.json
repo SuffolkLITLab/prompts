@@ -18,7 +18,6 @@
         "type": "module"
     },
     "permissions": [
-        "tabs",
         "activeTab",
         "storage",
         "scripting",
