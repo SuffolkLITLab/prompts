@@ -1,5 +1,5 @@
 // Get the selected text
-function getSelection() {
+function getSelectionFromPage() {
   let selectedText = window.getSelection().toString();
       
   if (selectedText.length === 0) {
@@ -25,4 +25,4 @@ function getSelection() {
 
   return [selectedText,body_text]
 }
-chrome.runtime.sendMessage({selectedText:getSelection()})
+chrome.runtime.sendMessage({selectedText:getSelectionFromPage()});

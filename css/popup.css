@@ -162,10 +162,8 @@
 	}
 
 	#main_wrapper{
-		float:left;
-		width:100%;
-		min-height: 135px;
-		overflow-y: on;
+		width:650px !important;
+		margin: 0px auto;
 	}
 
 	#inner_wrapper{

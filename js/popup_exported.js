@@ -1,5 +1,5 @@
 // Get the selected text
-function getSelection() {
+function getSelectionFromPage() {
   const focusedElement = document.activeElement;
 
   if (focusedElement) {
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // Add event listener to button
       button.addEventListener('mousedown', function() {
-        text_arry = getSelection(); selectedText = text_arry[0]; bodyText = text_arry[1];
+        text_arry = getSelectionFromPage(); selectedText = text_arry[0]; bodyText = text_arry[1];
       });
       button.addEventListener('click', function() {
         choose_prompt(this.dataset.choice); // 'this' refers to the button clicked
