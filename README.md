@@ -25,6 +25,27 @@ instead of
   },
 ``` 
 
+and it uses 
+
+```
+    "permissions": [
+        "activeTab",
+        "scripting",
+        "clipboardWrite"
+    ],
+```
+
+instead of 
+
+```
+    "permissions": [
+        "activeTab",
+        "storage",
+        "scripting",
+        "clipboardWrite"
+    ],
+```
+
 ## get_selection.js 
 
 Renamed the `getSelection` function to `getSelectionFromPage` to avoid conflict with `window.getSelection()`
