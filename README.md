@@ -1,6 +1,6 @@
 # LIT Prompts
 
-_**Get the extension: [Firefox Add-on](https://addons.mozilla.org/en-US/firefox/addon/lit-prompts/) or [Chrome extension](https://chromewebstore.google.com/detail/lit-prompts/hfeojjmldhebkeknfapoghcohkhffcmp)**_
+_**Install the extension [for Firefox](https://addons.mozilla.org/en-US/firefox/addon/lit-prompts/) or [for Chrome](https://chromewebstore.google.com/detail/lit-prompts/hfeojjmldhebkeknfapoghcohkhffcmp).**_
 
 LIT Prompts is a browser extension that generates LLM prompts based on user-authored templates. It is a project of Suffolk University Law School's [Legal Innovation & Technology (LIT) Lab](https://suffolklitlab.org/). It was designed to help students explore [prompt engineering](https://suffolklitlab.org/). Users can create and save prompt templates for use within the extension. These templates can use data from your active browser window (e.g., selected text or the whole text of a webpage) as well as text input provided by you. They can also feed into each other, allowing one to create complex interactions. For example, you can make interactions that:
 
