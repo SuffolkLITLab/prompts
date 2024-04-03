@@ -11,4 +11,7 @@ function(request, sender, sendResponse) {
   if (request.bodyText) {
       sendInfoToPopup(request.bodyText);
   }
+  if (request.run_location) {
+    sendInfoToPopup(request.run_location);
+}
 });

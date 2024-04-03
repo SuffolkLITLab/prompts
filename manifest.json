@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "version": "0.1.0",
+    "version": "0.2.0",
     "name": "LIT Prompts",
     "description": "Create and run LLM prompt templates based on in-browser content and user input.",
     "homepage_url": "https://github.com/SuffolkLITLab/prompts",
@@ -14,8 +14,8 @@
         "48": "img/icon-48.png",
         "128": "img/icon-128.png" },
     "background": {
-        "service_worker": "js/background.js",
-        "type": "module"
+      "service_worker": "js/background.js",
+      "type": "module"
     },
     "permissions": [
         "activeTab",
@@ -23,9 +23,9 @@
         "clipboardWrite"
     ],
     "host_permissions": [
-      "http://*/*",
-      "https://*/*"
-    ],    
+        "http://*/*",
+        "https://*/*"
+      ],    
     "options_ui": {
     "page": "options.html",
     "open_in_tab": true

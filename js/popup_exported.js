@@ -19,9 +19,15 @@ function getSelectionFromPage() {
   }
   let body_text = document.getElementById('scratch_pad').value;
 
-  console.log(selectedText,body_text)
+  try {
+    let run_location = window.location.toString();    
+  } catch (error) {
+    let run_location = "location unknown";
+  }
 
-  return [selectedText,body_text]
+  console.log(selectedText,body_text,run_location)
+
+  return [selectedText,body_text,run_location]
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -66,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
   var open_scratch = document.getElementById('open_scratch');
   document.getElementById('open_scratch').addEventListener('click', function() {
-      if (confirm('This will replace the current scrtach pad contents with the file you upload. Choose "OK" to continue or "Cancel" to keep things as they are.') == true) {
+      if (confirm('This will replace the current scratch pad contents with the file you upload. Choose "OK" to continue or "Cancel" to keep things as they are.') == true) {
           document.getElementById('fileInput').click(); // Trigger file input
       }
   });

@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
     var open_scratch = document.getElementById('open_scratch');
     document.getElementById('open_scratch').addEventListener('click', function() {
-        if (confirm('This will replace the current scrtach pad contents with the file you upload. Choose "OK" to continue or "Cancel" to keep things as they are.') == true) {
+        if (confirm('This will replace the current scratch pad contents with the file you upload. Choose "OK" to continue or "Cancel" to keep things as they are.') == true) {
             document.getElementById('fileInput').click(); // Trigger file input
         }
     });

@@ -22,7 +22,14 @@ function getSelectionFromPage() {
     }
   }
   body_text = document.body.innerText;
+  try {
+    run_location = window.location.toString();    
+  } catch (error) {
+    run_location = "location unknown";
+  }
+  
+  console.log(selectedText,body_text,run_location)
 
-  return [selectedText,body_text]
+  return [selectedText,body_text,run_location]
 }
-chrome.runtime.sendMessage({selectedText:getSelectionFromPage()});
+chrome.runtime.sendMessage({selectedText:getSelectionFromPage()})

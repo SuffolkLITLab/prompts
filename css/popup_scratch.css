@@ -11,6 +11,45 @@
 		box-sizing: border-box;
 	}
 
+	#send {
+		float:left;
+		width:75%;
+		margin: 5px 0 0px 0;
+	}
+
+	#chat_send {
+		float:left;
+		width:75%;
+		margin: 5px 0 0px 0;
+	}
+
+	#restartButton_companion {
+		float:right;
+		width:24%;
+		margin: 5px 0 10px 0;
+	}
+
+	#restartButton_companion_chat {
+		float:right;
+		width:24%;
+		margin: 5px 0 10px 0;
+	}
+	
+	button {
+		-webkit-appearance:none;
+		opacity: 1;
+		border-radius: 3px;
+		font-size: 14px;
+		color:black;
+		border: 1px solid #7b7b7b;
+		padding: 3px 10px;
+		background: rgb(211, 211, 211);
+	}
+	
+	textarea {
+		font-size: 14px;
+	}	
+
 	.file_menu {
 		border-bottom: 1px solid #eee;
 		padding-left: 5px;

@@ -35,16 +35,50 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('custom_html', this.value);
     });    
 
+    async function export_page(mode=0) {
+        try {
+          // Assuming 'secretData' and 'password' variables are defined and have valid values
+          if (document.getElementById("api_key").value.trim()!="") {
+            password = prompt("Enter a password to encrypt your API key; leave blank to export key w/o password protection.");
+          } else {
+            password = "";
+          }
+          if (password.trim()=="") {
+            console.log("No password")
+            password = "56189465465";
+            pwd = password;
+          } else {
+            pwd = null;
+          }
+
+          const encryptedData = await encryptData(document.getElementById("api_key").value, password=password);
+          if (encryptedData) {
+            // Do something with the encrypted data
+            console.log("Encrypted data:", encryptedData);
+            // Additional logic or function calls can be placed here
+            if (mode==1) {
+                saveTextAsFile(build_export_w_scrtach(encryptedData,pwd),"interactions_w_scratch.html")
+            } else {
+                saveTextAsFile(build_export(encryptedData,pwd),"interactions.html")  
+            }
+        } else {
+            console.error("Encryption failed or returned an empty string.");
+          }
+        } catch (error) {
+          console.error("An error occurred:", error);
+        }
+      }
+
     // Do something when a button is clicked
     var exportPrompts = document.getElementById('prompt2page');
     exportPrompts.addEventListener('click', function() {
-        saveTextAsFile(build_export(),"interactions.html")
+        export_page(0);
     });
 
     // Do something when a button is clicked
-    var exportSratchPrompts = document.getElementById('scrtach_prompt2page');
+    var exportSratchPrompts = document.getElementById('scratch_prompt2page');
     exportSratchPrompts.addEventListener('click', function() {
-        saveTextAsFile(build_export_w_scrtach(),"interactions_w_scratch.html")
+        export_page(1);
     });
 
     // Do something when a button is clicked
@@ -624,6 +658,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
 (async () => {
     spinJS = await loadFile('js/spin.js');
     functionsJS = await loadFile('js/functions.js');
@@ -634,16 +669,24 @@ document.addEventListener('DOMContentLoaded', () => {
     popupHTML = await loadFile('./popup.html');
 })()
 
-function build_export() {
+
+function build_export(encrypted_key,pwd=null) {
     fileText = popupHTML
     fileText = fileText.replace(`</title>`,`</title>\n<script>\n\nlocalStorage.setItem('templates',JSON.stringify(`+localStorage.templates+`));\n`);
-    fileText = fileText.replace(`<script src="js/spin.js"></script>`,`\n`+spinJS)
-    fileText = fileText.replace(`<script src="js/functions.js"></script>`,`\n`+functionsJS)
-    fileText = fileText.replace(`<script src="js/prompts.js"></script>`,`\n`+promptsJS)
-    fileText = fileText.replace(`<script src="js/popup.js"></script>`,`\n`+popupJS)
-    fileText = fileText.replace(`<link rel="stylesheet" type="text/css" href="css/popup.css">`,`</script>\n<style>\n`+popupCSS+`\n</style>`)
+    fileText = fileText.replace(`<script src="js/spin.js?v=0.2.0"></script>`,`\n`+spinJS)
+    fileText = fileText.replace(`<script src="js/functions.js?v=0.2.0"></script>`,`\n`+functionsJS)
+    fileText = fileText.replace(`<script src="js/prompts.js?v=0.2.0"></script>`,`\n`+promptsJS)
+    fileText = fileText.replace(`<script src="js/popup.js?v=0.2.0"></script>`,`\n`+popupJS)
+    fileText = fileText.replace(`<link rel="stylesheet" type="text/css" href="css/popup.css?v=0.2.0">`,`</script>\n<style>\n`+popupCSS+`\n</style>`)
+
+    fileText = fileText.replace(`function resize(e,disable=0){`,`function resize(e,disable=1){`)
     
-    fileText = fileText.replace(`api_key = ""`,`api_key = "`+localStorage.api_key+`"`);
+    //fileText = fileText.replace(`api_key = ""`,`api_key = "`+localStorage.api_key+`"`);
+    if (pwd==null) {
+        fileText = fileText.replace(`//if (localStorage.api_key=="") { (async () => { api_key = await decryptData("") })() }`,`if (localStorage.api_key=="") { (async () => { api_key = await decryptData("`+encrypted_key+`") })() }`);
+    } else {
+        fileText = fileText.replace(`//if (localStorage.api_key=="") { (async () => { api_key = await decryptData("") })() }`,`if (localStorage.api_key=="") { (async () => { api_key = await decryptData("`+encrypted_key+`","`+pwd+`") })() }`);
+    }
     fileText = fileText.replace(`api_base = "https://api.openai.com/v1/chat/completions"`,`api_base = "`+localStorage.api_base+`"`);
 
     fileText = fileText.replaceAll(`Please check its contents by clicking "Templates & Settings" bellow.`,``)
@@ -655,20 +698,25 @@ function build_export() {
     return fileText
 }
 
-function build_export_w_scrtach() {
+function build_export_w_scrtach(encrypted_key,pwd=null) {
     fileText = popupHTML
     fileText = fileText.replace(`</title>`,`</title>\n<script>\n\nlocalStorage.setItem('templates',JSON.stringify(`+localStorage.templates+`));\n`);
-    fileText = fileText.replace(`<script src="js/spin.js"></script>`,spinJS)
-    fileText = fileText.replace(`<script src="js/functions.js"></script>`,functionsJS)
-    fileText = fileText.replace(`<script src="js/prompts.js"></script>`,promptsJS)
-    fileText = fileText.replace(`<script src="js/popup.js"></script>`,popupJS)
-    fileText = fileText.replace(`<link rel="stylesheet" type="text/css" href="css/popup.css">`,`</script>\n<style>\n`+popup_scratchCSS+`\n</style>`)
+    fileText = fileText.replace(`<script src="js/spin.js?v=0.2.0"></script>`,spinJS)
+    fileText = fileText.replace(`<script src="js/functions.js?v=0.2.0"></script>`,functionsJS)
+    fileText = fileText.replace(`<script src="js/prompts.js?v=0.2.0"></script>`,promptsJS)
+    fileText = fileText.replace(`<script src="js/popup.js?v=0.2.0"></script>`,popupJS)
+    fileText = fileText.replace(`<link rel="stylesheet" type="text/css" href="css/popup.css?v=0.2.0">`,`</script>\n<style>\n`+popup_scratchCSS+`\n</style>`)
 
     fileText = fileText.replace(`window.scrollTo(0, 0);`,`document.getElementById('inner_wrapper').scrollTo(0, 0);`)
     fileText = fileText.replace(`var getScrollTopDocumentAtBegin = document.documentElement.scrollTop + document.body.scrollTop`,`var getScrollTopDocumentAtBegin = document.getElementById('inner_wrapper').scrollTop + document.body.scrollTop`)    
     fileText = fileText.replace(`setTimeout(function(){  window.scrollTo(`,`setTimeout(function(){  document.getElementById('inner_wrapper').scrollTo(`)
 
-    fileText = fileText.replace(`api_key = ""`,`api_key = "`+localStorage.api_key+`"`);
+    //fileText = fileText.replace(`api_key = ""`,`api_key = "`+localStorage.api_key+`"`);
+    if (pwd==null) {
+        fileText = fileText.replace(`//if (localStorage.api_key=="") { (async () => { api_key = await decryptData("") })() }`,`if (localStorage.api_key=="") { (async () => { api_key = await decryptData("`+encrypted_key+`") })() }`);
+    } else {
+        fileText = fileText.replace(`//if (localStorage.api_key=="") { (async () => { api_key = await decryptData("") })() }`,`if (localStorage.api_key=="") { (async () => { api_key = await decryptData("`+encrypted_key+`","`+pwd+`") })() }`);
+    }
     fileText = fileText.replace(`api_base = "https://api.openai.com/v1/chat/completions"`,`api_base = "`+localStorage.api_base+`"`);
 
     fileText = fileText.replaceAll(`<title>Prompt Interactions</title>`,`<title>Prompt Interactions with Scratch Pad</title>`)

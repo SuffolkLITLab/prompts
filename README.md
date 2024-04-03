@@ -8,7 +8,9 @@ The two differ in the following ways.
 
 ## manifest.js
 
-This branch does not have include `"browser_specific_settings"`. It uses 
+This branch does not have include `"browser_specific_settings"`. 
+
+It uses 
 
 ```
   "background": {
@@ -24,35 +26,6 @@ instead of
     "scripts": ["js/background.js"]
   },
 ``` 
-
-and it uses 
-
-```
-    "permissions": [
-        "activeTab",
-        "scripting",
-        "clipboardWrite"
-    ],
-```
-
-instead of 
-
-```
-    "permissions": [
-        "activeTab",
-        "storage",
-        "scripting",
-        "clipboardWrite"
-    ],
-```
-
-## get_selection.js 
-
-Renamed the `getSelection` function to `getSelectionFromPage` to avoid conflict with `window.getSelection()`
-
-## popup_exported.js
-
-Renamed the `getSelection` function to `getSelectionFromPage` for consistency. See above.
 
 ## popup.css
 
@@ -75,19 +48,6 @@ instead of
 		overflow-y: on;
 	}
 
-```
-
-## options.css
-
-This branch includes
-
-```
-  body {
-    font-family: georgia, 'times new roman', times, serif; 
-    box-sizing: border-box;
-    font-size: 15px;
-    line-height: 22px;        
-  }
 ```
 
 ## README.md

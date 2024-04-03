@@ -4,11 +4,11 @@
 <meta charset="utf-8"> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <title>Prompt Interactions</title>
-<script src="js/spin.js"></script>
-<script src="js/functions.js"></script>
-<script src="js/prompts.js"></script>
-<script src="js/popup.js"></script>
-<link rel="stylesheet" type="text/css" href="css/popup.css">
+<script src="js/spin.js?v=0.2.0"></script>
+<script src="js/functions.js?v=0.2.0"></script>
+<script src="js/prompts.js?v=0.2.0"></script>
+<script src="js/popup.js?v=0.2.0"></script>
+<link rel="stylesheet" type="text/css" href="css/popup.css?v=0.2.0">
 </head>
 <body>
   <div id="inline_scratch">
@@ -39,11 +39,13 @@
       </div>
       <div id="text_input" style="display:none;">
         <textarea id="user_input"></textarea>
-        <button id="send" style="width:100%;margin:5px 0 10px 0;">Send</button>
+        <button id="send">Send</button>
+        <button id="restartButton_companion">Restart</button>
       </div>
       <div id="chat_text_input" style="display:none;">
         <textarea id="chat_user_input"></textarea>
-        <button id="chat_send" style="width:100%;margin:5px 0 10px 0;">Send</button>
+        <button id="chat_send" >Send</button>
+        <button id="restartButton_companion_chat">Restart</button>
       </div>
       <div id="continue_gen" style="display:none;">
         <button id='continueButton'>Continue text generation</button>
