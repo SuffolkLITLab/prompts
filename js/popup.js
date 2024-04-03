@@ -16,7 +16,8 @@ chrome.runtime.onMessage.addListener(
       // Do something with the information from the background
       selectedText = request.data[0];
       bodyText = request.data[1];
-      console.log("Highlighted text: "+selectedText+"\n\nBody text: "+bodyText.slice(0,150)+"...");
+      run_location = request.data[2];
+      console.log("Highlighted text: "+selectedText+"\n\nBody text: "+bodyText.slice(0,150)+"\n\nRun location:"+run_location+"...");
     }
   }
 );

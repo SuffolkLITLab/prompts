@@ -1,6 +1,13 @@
     * {
         box-sizing: border-box;
     }
+
+    body {
+        font-family: georgia, 'times new roman', times, serif; 
+        box-sizing: border-box;
+        font-size: 15px;
+        line-height: 23px;        
+    }
     
     a.example {
         color:white;

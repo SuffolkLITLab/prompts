@@ -84,7 +84,7 @@ When you run a template prompt with the LIT Prompts extension this is what happe
 3. If we were able to find highlighted text or read the innerText, we attempt to replace the following placeholders with word counts, where:
     - `{{nSelectedWords}}` is the number of highlighted words; and
     - `{{nWordsOnPage}}` is the number of words found in the innerText
-4. An attempt is made to replace `{{scrtach}}` with the contents of your Scratch Pad
+4. An attempt is made to replace `{{scratch}}` with the contents of your Scratch Pad
 5. If this template was triggered by a preceding template, we replace `{{passThrough}}` with the whole prompt.
 6. If the content of `{{passThrough}}` is valid JSON, we look for references to individual first-level keys and replace such references with the key's value (e.g., `{{passThrough["next"]}}` would be replaced with the value of the key "next")
 7. We calculate the values for a bunch of predefined variables and replace the relevant placeholder if they exists in the template. Namely:

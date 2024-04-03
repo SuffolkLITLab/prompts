@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8"> 
     <title>Prompt Templates &amp; Settings</title>
-    <link rel="stylesheet" href="css/options.css" />
-    <script src="js/functions.js"></script>
-    <script src="js/options.js"></script>
+    <link rel="stylesheet" href="css/options.css?v=0.2.0" />
+    <script src="js/functions.js?v=0.2.0"></script>
+    <script src="js/options.js?v=0.2.0"></script>
   </head>
   <body style="padding:5px 20px 40px 20px;">
 
     <h2>LIT Prompts</h2>
+
+    <p style="background:#ffef94;padding: 10px 15px;border: 1px solid #a6a6a6;">
+      For help learning how to write prompts, I suggest checking out <a href="https://sadlynothavocdinosaur.com/posts/50-days-of-lit-prompts/" target="_blank">50-Days of LIT Prompts</a>. You don't have to work through every example, but working through the first few exercises will set you up for success. Also, some of the later examples are <a href="https://sadlynothavocdinosaur.com/posts/word-processor/" target="_blank">pretty cool</a>. 
+    </p>
 
     <p>This browser extension is a project of Suffolk University Law School's <a href="https://suffolklitlab.org/" target="_blank">Legal Innovation &amp; Technology (LIT) Lab</a>. It was designed to help students explore <a href="https://en.wikipedia.org/wiki/Prompt_engineering" target="_blank">prompt engineering</a>. Below you can create and save prompt templates for use by this extension. These templates can use data from your active browser window (e.g., selected text or the whole text of a webpage) as well as text input provided by you. They can also feed into each other, allowing one to create complex interactions. For example, you can make interactions that:</p>
     <ul>
@@ -34,17 +39,17 @@
       <span class="creds">API Key: <input id="api_key" style="width:400px"></span>
     </p>
     <p>
-      Model selection is done on a prompt-by-prompt basis. <span style="background: #ffef94;"><b>Keep in mind, sometimes API providers retire older models. So, if you have a prompt that stops working and the above credentials look good, you should check the model.</b></span>
+      Model selection is done on a prompt-by-prompt basis. <span style="background: #ffef94;"><b>Keep in mind, sometimes API providers retire older models. So, if you have a prompt that stops working and the above credentials look good, you should check the model.</b> See e.g., <a href="https://platform.openai.com/docs/models" target="_blank">OpenAI's models</a>.</span>
     </p>
 
     <h3>Export to HTML</h3>
     <p>
-      You can export runnable versions of your interactions to one of two HTML output types: (1) a page that replicates this extension's "popup," the window with buttons that appears when you click the extension; or (2) a page that replicates both the "popup" and a <a href="scratch.html" target="_blank">Scratch Pad</a>. These outputs should run in any browser with access to the endpoint set above. <b>The files will include a copy, not only of the endpoint, but also the API key listed above!</b> If the <i>base</i> and <i>key</i> above are blank, the user will be prompted to enter their own values when they hit an error. They will NOT be able to access text from any external page. The <code>{{innerText}}</code> variable will be set equal to <code>{{scratch}}</code>, and <code>{{highlihghted}}</code> will only work on text in the Scratch Pad. Additionally, they will not include links to edit the prompts or to a stand-along Scratch Pad. See the discussion of Prompt Templates below for more context. 
+      You can export runnable versions of your interactions to one of two HTML output types: (1) a page that replicates this extension's "popup," the window with buttons that appears when you click the extension; or (2) a page that replicates both the "popup" and a <a href="scratch.html" target="_blank">Scratch Pad</a>. These outputs should run in any browser with access to the endpoint set above. <b>The files will include a copy, not only of the endpoint, but also the API key listed above!</b> If the <i>base</i> or <i>key</i> above are blank, the user will be prompted to enter their own values when they hit an error. If you provide a password when prompted on export, your key will be encrypted and placed behind a password. However, anyone with that password will be able to access your key. Users will NOT be able to access text from any external page. The <code>{{innerText}}</code> variable will be set equal to <code>{{scratch}}</code>, and <code>{{highlihghted}}</code> will only work on text in the Scratch Pad. Additionally, they will not include links to edit the prompts or to a stand-along Scratch Pad. See the discussion of Prompt Templates below for more context. 
     </p>
     <p>The content of this textarea will be appended to the top of your exports. HTML is allowed.</p>
     <textarea id="custom_html"></textarea>
     <button id="prompt2page">Export Interactions Page</button>
-    <button id="scrtach_prompt2page">Export Scrtach Pad &amp; Interactions Page</button>
+    <button id="scratch_prompt2page">Export Scratch Pad &amp; Interactions Page</button>
 
     <h3>Prompt Templates</h3>
     <p>
@@ -77,7 +82,7 @@
       <span style="float:right">
         <a href="https://github.com/SuffolkLITLab/prompts/" target="_projectPage">GitHub</a> | 
         <a href="https://github.com/SuffolkLITLab/prompts/issues" target="_logIssues">feedback</a> | 
-          <span id="version">v 0.1.0</span>
+          <span id="version">v 0.2.0</span>
       </span>
   </div>
     

@@ -9,6 +9,9 @@ if (localStorage.api_key) {
   //FOR EXPORT: localStorage.setItem('api_key',api_key)
 }
 
+// user decrypt
+//if (localStorage.api_key=="") { (async () => { api_key = await decryptData("") })() }
+
 if (localStorage.api_base) {
   api_base = localStorage.api_base
 } else {
@@ -18,6 +21,7 @@ if (localStorage.api_base) {
 
 var bodyText = "";
 var selectedText = "";
+var run_location = "";
 var question_arry = {};
 var last_question = "";
 var output_type = "";
@@ -34,6 +38,7 @@ var behavior = "";
 var passThrough = "";
 var bubble = 0;
 var calls = 0;
+var overflow = 0;
 
 popup_CSS = `* {
   box-sizing: border-box;
@@ -204,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       transcript_html = "<html>\n<head>\n<title>Transcript: "+ saved_on +"</title><style>\n"+popup_CSS+"\n</style>\n</head>\n<body>\n";
       transcript_html += document.getElementById('transcript').innerHTML;
-      transcript_html += "<div class='msg_text'>Saved "+saved_on+" at " + (d.getHours() % 12 || 12) + ":" + ('0' + d.getMinutes()).slice(-2) + " " + (d.getHours() >= 12 ? 'pm' : 'am') + "</div>"
+      transcript_html += "<div class='msg_text'>Saved "+saved_on+" at " + (d.getHours() % 12 || 12) + ":" + ('0' + d.getMinutes()).slice(-2) + " " + (d.getHours() >= 12 ? 'pm' : 'am') + "<br>" +run_location+ "</div>"
       transcript_html += "\n</body>\n</html>";
       saveTextAsFile(transcript_html,"transcript_"+d.getFullYear()+"-"+('0'  + d.getMonth()).slice(-2)+"-"+('0'  + d.getDate()).slice(-2)+"T"+('0'  + d.getHours()).slice(-2)+('0' + d.getMinutes()).slice(-2)+('0'  + d.getSeconds()).slice(-2)+".html")
   });
@@ -212,6 +217,15 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById("restartButton").addEventListener("click", function() {
     location.reload();
   });
+
+  document.getElementById("restartButton_companion").addEventListener("click", function() {
+    location.reload();
+  });
+
+  document.getElementById("restartButton_companion_chat").addEventListener("click", function() {
+    location.reload();
+  });
+
 
 //FOR EXPORT:   if (!localStorage.scratch_pad) {
 //FOR EXPORT:     localStorage.setItem('scratch_pad',"")
@@ -222,22 +236,24 @@ document.addEventListener('DOMContentLoaded', function () {
   var BORDER_SIZE = 8;
       
   let m_pos;
-  function resize(e){
-    if (window.innerWidth>=458) {
-      const dx = m_pos - e.x;
-      m_pos = e.x;
-      panel_width = parseInt(getComputedStyle(panel, '').width)
-      if (panel_width<180) {
-        panel_width = 181;
-      } else if ((window.innerWidth-panel_width)< 90) {
-        panel_width = window.innerWidth - 91;
+  function resize(e,disable=0){
+    if (disable!=1) {
+      if (window.innerWidth>=458) {
+        const dx = m_pos - e.x;
+        m_pos = e.x;
+        panel_width = parseInt(getComputedStyle(panel, '').width)
+        if (panel_width<180) {
+          panel_width = 181;
+        } else if ((window.innerWidth-panel_width)< 90) {
+          panel_width = window.innerWidth - 91;
+        }
+        panel.style.width = (panel_width + dx) + "px";
+        panel_l.style.right = (panel_width + dx) + "px";
+        localStorage.panel_w = (panel_width + dx);  
+      } else {
+        panel.style.width = "100%"
+        panel_l.style.right = "100%"
       }
-      panel.style.width = (panel_width + dx) + "px";
-      panel_l.style.right = (panel_width + dx) + "px";
-      localStorage.panel_w = (panel_width + dx);  
-    } else {
-      panel.style.width = "100%"
-      panel_l.style.right = "100%"
     }
   }
 
@@ -382,7 +398,7 @@ function choose_prompt(choice) {
     }
 
     if (abandon_prompt == 0) {
-      // Place scrtach pad text into template
+      // Place scratch pad text into template
       llm_prompt = llm_prompt.replace(/{{scratch}}/g, localStorage.getItem('scratch_pad'));
       try {
         console.log("Attempting to parse Scratch Pad for JSON...")
@@ -401,8 +417,11 @@ function choose_prompt(choice) {
         }
       }
       
-
-      llm_prompt = llm_prompt.replace(/{{passThrough}}/g, passThrough);
+      if (passThrough.constructor === ({}).constructor) {
+        llm_prompt = llm_prompt.replace(/{{passThrough}}/g, JSON.stringify(passThrough));
+      } else {
+        llm_prompt = llm_prompt.replace(/{{passThrough}}/g, passThrough);
+      }
       var passThroughjson = llm_prompt.match(/{{passThrough\["[a-zA-Z_-]+"\]}}/g);
       // Loop through each variable and present it as a question
       if (passThroughjson) {
@@ -508,7 +527,7 @@ function build_prompt() {
   if (questions) {
     for (question of questions) {
       last_question = question;
-      if ((!question_arry[question]) || (question_arry[question].match(/\*}}$/))) {
+      if ((!question_arry[question]) || (question.match(/\*}}$/))) {
         question_ = question.replace(/\*}}$/,"}}")
         question_ = question_.replace(/{|}/g,"");
         if (document.getElementById('thinking_box').style.display=="block") {
@@ -543,6 +562,7 @@ function build_prompt() {
 
     // Count the words in the prompt
     words = llm_prompt.match(/\b(\w+)\b/g).length;
+    characters = llm_prompt.length;
     token_est = Math.round(words*1.75)
 
     console.log("Words in prompt: "+words+" (~"+token_est+" tokens)\nMODEL: "+model+"\nPROMPT:\n\n"+llm_prompt)
@@ -598,7 +618,7 @@ function saveOnEnter(event) {
 }
 
 function submitOnEnter(event) {
-  if (event.which === 13) {
+  if (!event.shiftKey && event.which === 13) {
       if (!event.repeat) {
         submit_text();
       }
@@ -625,7 +645,7 @@ function submit_chat_text() {
 }
 
 function submitChatOnEnter(event) {
-  if (event.which === 13) {
+  if (!event.shiftKey && event.which === 13) {
       if (!event.repeat) {
         submit_chat_text();
       }
@@ -743,12 +763,17 @@ function insert_restart(){
 
 function after_build(LLM_text,finish_reason="stop") {
   
-  LLM_text_collection += LLM_text;
+  if ((overflow==1) && (behavior=="chat")) {
+    LLM_text_collection += LLM_text;
+  } else {
+    LLM_text_collection = LLM_text;
+  }
 
   // add line breaks for screen output
   LLM_text_formatted = accountForHTML(LLM_text);
   LLM_text_formatted = LLM_text_formatted.replaceAll(/```([^`]*)```\n?/g, "<pre class='code_wrapper'><code>$1</code></pre>");
   LLM_text_formatted = LLM_text_formatted.replaceAll(/`([^`]*)`/g, "<code>$1</code>");
+  LLM_text_formatted = LLM_text_formatted.trim();
   document.getElementById('thinking_box').style.display='none';
 
   // If not hidden
@@ -772,17 +797,20 @@ function after_build(LLM_text,finish_reason="stop") {
     passThrough = LLM_text_collection;
   }
 
+  output_words = LLM_text_collection.match(/\b(\w+)\b/g).length;
+  output_characters = LLM_text_collection.length;
+
   // Output location
   if (output_to==1) {
-    document.getElementById('output_window').innerHTML += "<div class='msg_text'>above output copied to clipboard</div>";
+    document.getElementById('output_window').innerHTML += "<div class='msg_text'>above output copied to clipboard (~"+output_words.toLocaleString()+" words / ~"+output_characters.toLocaleString()+" characters)</div>";
     copy_to_clipboard(LLM_text_collection);
   } else if (output_to==2) {
     //FOR EXPORT: document.getElementById('scratch_pad').value += LLM_text_collection;
-    document.getElementById('output_window').innerHTML += "<div class='msg_text'>above output appended to scratch pad</div>";
+    document.getElementById('output_window').innerHTML += "<div class='msg_text'>above output appended to scratch pad (~"+output_words.toLocaleString()+" words / ~"+output_characters.toLocaleString()+" characters)</div>";
     localStorage.setItem('scratch_pad', localStorage.getItem('scratch_pad')+LLM_text); // used LLM_text, not LLM_text_collection because will have already been appended
   } else if (output_to==3) {
     //FOR EXPORT: document.getElementById('scratch_pad').value = LLM_text_collection;
-    document.getElementById('output_window').innerHTML += "<div class='msg_text'>above output replaced scratch pad</div>";
+    document.getElementById('output_window').innerHTML += "<div class='msg_text'>above output replaced scratch pad (~"+output_words.toLocaleString()+" words / ~"+output_characters.toLocaleString()+" characters)</div>";
     localStorage.setItem('scratch_pad', LLM_text_collection);
   } else if (output_to==5) {
     //document.getElementById('output_window').innerHTML += "<div class='msg_text'>above output copied to clipboard</div>";
@@ -799,7 +827,10 @@ function after_build(LLM_text,finish_reason="stop") {
   
   // Behavior
 
-  if (finish_reason=="length"){
+  overflow=0;
+
+  if ((finish_reason=="length") && (behavior=="chat")) {
+    overflow=1;
     document.getElementById('continue_gen').style.display='block';
     calls=0;
     scroll2Q("text_"+bubble); 
