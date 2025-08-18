@@ -96,10 +96,11 @@ When you run a template prompt with the LIT Prompts extension this is what happe
     - D20 (1-20): `{{d20}}`
     - Day of week (0-6): `{{dayOfWeek}}`
     - Day of week (English): `{{DayOfWeek}}`
-    - Month (1-12): `{{month}}`
+    - Month (0-11): `{{month}}`
+    - Month (1-12): `{{month1}}`
     - Month (01-12): `{{month2d}}`
     - Month (English): `{{Month}}`
-    - Day of Month (0-31): `{{day}}`
+    - Day of Month (1-31): `{{day}}`
     - Day of Month (01-31): `{{day2d}}`
     - Year: `{{year}}`
     - Hour (1-12): `{{hours}}`
@@ -114,7 +115,7 @@ When you run a template prompt with the LIT Prompts extension this is what happe
 8. We look for any placeholders that aren't in the list above and prompt the user to provide a value. That is, if there is text encased in double curly brackets and it is not a predefined variable, like `{{What is your name?}}`, it will trigger a user prompt that echo's its content (e.g., a text bubble containing, "What is your name?"). After the user answers, the text of their reply will replace this placeholder (i.e., `{{What is your name?}}`). Note: if such a placeholder shows up multiple times in a single template or in a chain of templates triggering one after the other, the default behavior is to only ask the user to provide a reply once. To override this behavior place an asterisk before the closing brackets (i.e., `*}}`).
 9. After the template has been processed the behavior of your interaction is defined by the parameters found below the template text on _Templates & Settings_.
     - **Output Type:** When you run this prompt template, should it echo back the text of the prompt or an LLM's reply?  
-    - **Model:** What model should be used (e.g. gpt-3.5-turbo). (N/A if Output Type is Prompt)
+    - **Model:** What model should be used (e.g. gpt-4o-mini). (N/A if Output Type is Prompt)
     - **Temperature:** How "random" should replies be (0-1), where 0 is very predictable and 1 is the most unpredictable. (N/A if Output Type is Prompt)
     - **Max Tokens:** Max number of tokens to include in your answer. 1 token ~= 1.7 words. Smaller answers are quicker (and less expensive). (N/A if Output Type is Prompt) 
     - **JSON:** If your model supports JSON Mode, we will turn on JSON Mode, if not, we will alert you when output isn't proper JSON.
@@ -149,7 +150,7 @@ When reading through templates, you may see comments between `[#` and `#]`. Such
 Provide a short 150 word summary of the above text. If asked any follow-up questions, use the above text, and ONLY the above text, to answer them. If you can't find an answer in the above text, politely decline to answer explaining that you can't find the information. You can, however, finish a thought you started above if asked to continue, but don't write anything that isn't supported by the above text. And keep all of your replies short! 
 
 ```
-Output Type: `LLM`,  Model: `gpt-3.5-turbo-16k`,  Temperature: `0`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen only`,  Post-run Behavior: `CHAT`,  Hide Button: `unchecked`  
+Output Type: `LLM`,  Model: `gpt-4o-mini`,  Temperature: `0`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen only`,  Post-run Behavior: `CHAT`,  Hide Button: `unchecked`  
 
 [jump to top](#lit-prompts)
 
@@ -160,7 +161,7 @@ Output Type: `LLM`,  Model: `gpt-3.5-turbo-16k`,  Temperature: `0`,  Max Tokens:
 The above is an email. Draft a brief and professional reply politely declining its request. 
 
 ```
-Output Type: `LLM`,  Model: `gpt-3.5-turbo-16k`,  Temperature: `0.7`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen + clipboard`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
+Output Type: `LLM`,  Model: `gpt-4o-mini`,  Temperature: `0.7`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen + clipboard`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
 
 [jump to top](#lit-prompts)
 
@@ -169,7 +170,7 @@ Output Type: `LLM`,  Model: `gpt-3.5-turbo-16k`,  Temperature: `0.7`,  Max Token
 Define the following word/phrase: {{highlighted}}[# Here we've set the Output To equal to Screen + append to scratch pad which means that the LLM's output will be appended to the contents of your Scratch Pad, which can be accessed from the Popup by clicking the "Scratch Pad" button. #]
 
 ```
-Output Type: `LLM`,  Model: `gpt-3.5-turbo`,  Temperature: `0`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen + append to scratch pad`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
+Output Type: `LLM`,  Model: `gpt-4o-mini`,  Temperature: `0`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen + append to scratch pad`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
 
 [jump to top](#lit-prompts)
 
@@ -188,7 +189,7 @@ Output Type: `Prompt`,  Model: `n/a`,  Temperature: `n/a`,  Max Tokens: `n/a`,  
 Provide a short 150 word summary of the above text. If asked any follow-up questions, use the above text, and ONLY the above text, to answer them. If you can't find an answer in the above text, politely decline to answer explaining that you can't find the information. You can, however, finish a thought you started above if asked to continue, but don't write anything that isn't supported by the above text. And keep all of your replies short! 
 
 ```
-Output Type: `LLM`,  Model: `gpt-3.5-turbo-16k`,  Temperature: `0`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen only`,  Post-run Behavior: `CHAT`,  Hide Button: `unchecked`  
+Output Type: `LLM`,  Model: `gpt-4o-mini`,  Temperature: `0`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen only`,  Post-run Behavior: `CHAT`,  Hide Button: `unchecked`  
 
 [jump to top](#lit-prompts)
 
@@ -252,7 +253,7 @@ Now that I've given you these specifications, your job is to make such an object
 
 Now provide your JSON object:
 ```
-Output Type: `LLM`,  Model: `gpt-3.5-turbo`,  Temperature: `0`,  Max Tokens: `300`,  JSON: `Yes`,  Output To `Screen only`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
+Output Type: `LLM`,  Model: `gpt-4o-mini`,  Temperature: `0`,  Max Tokens: `300`,  JSON: `Yes`,  Output To `Screen only`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
 
 [jump to top](#lit-prompts)
 
@@ -270,7 +271,7 @@ Return a JSON object with two key-value pairs. The first key is called `language
 Now return the object: 
 
 ```
-Output Type: `LLM`,  Model: `gpt-3.5-turbo-16k`,  Temperature: `0`,  Max Tokens: `250`,  JSON: `Yes`,  Output To `Hidden`,  Post-run Behavior: `display translation and prompt`,  Hide Button: `unchecked`  
+Output Type: `LLM`,  Model: `gpt-4o-mini`,  Temperature: `0`,  Max Tokens: `250`,  JSON: `Yes`,  Output To `Hidden`,  Post-run Behavior: `display translation and prompt`,  Hide Button: `unchecked`  
 
 [jump to top](#lit-prompts)
 
@@ -281,7 +282,7 @@ Translate the following text into {{passThrough["language"]}}. Here's the text t
 {{{{passThrough["translation"]}}}} [# If you're familiar with JSON, you'll recognize that the two variables above are accessing the values stored in some JSON object named passThrough. Namely, the value for "language" and "translation." In this way we can very cleanly slice up the output from the prior template. Because the Hide Button checkbox is checked, the user will not see a button for "display translation and prompt." That of course is okay, because it is being triggered by "Translate & reply in original language." #]
 
 ```
-Output Type: `LLM`,  Model: `gpt-3.5-turbo`,  Temperature: `0`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen + clipboard`,  Post-run Behavior: `FULL STOP`,  Hide Button: `checked`  
+Output Type: `LLM`,  Model: `gpt-4o-mini`,  Temperature: `0`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen + clipboard`,  Post-run Behavior: `FULL STOP`,  Hide Button: `checked`  
 
 [jump to top](#lit-prompts)
 
@@ -294,7 +295,7 @@ Coin flip: {{coinFlip}} [# The value of {{coinFlip}} is random, or as "random." 
 Now give me your response/poem: 
 
 ```
-Output Type: `LLM`,  Model: `gpt-3.5-turbo`,  Temperature: `0.9`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen only`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
+Output Type: `LLM`,  Model: `gpt-4o-mini`,  Temperature: `0.9`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen only`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
 
 [jump to top](#lit-prompts)
 
@@ -305,20 +306,20 @@ You're a helpful editor and you're going to help trim some text. I know it's alr
 {{highlighted}}
 
 ```
-Output Type: `LLM`,  Model: `gpt-3.5-turbo`,  Temperature: `0.7`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen + clipboard`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
+Output Type: `LLM`,  Model: `gpt-4o-mini`,  Temperature: `0.7`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen + clipboard`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
 
 [jump to top](#lit-prompts)
 
 ### Expand selected (short) text
 ```
-[# This template is the first in a chain of templates that can either end or loop back on itself. It works by getting the LLM to generate some dialog and send that along with text the user has highlighted to another template. That template takes an action and feeds into another template, and so on and so on. Note: we're using gpt-3.5-turbo-1106 as a model here and in some of the subsequent templates in this chain. When this model is retired it will break things and require updating. #]You are an actor playing the role of a helpful writing assistant. In this scene you will interact with a writer. You will ask them some questions about some copy they are working on. You're goal is to ask them enough question such that their answers can be used to expand on the existing text. That is, you want them to give you things one could use to expand on the existing text. As this is a dialogue, we will present it in the form of a transcript. The writer will start by reading what they have so far. 
+[# This template is the first in a chain of templates that can either end or loop back on itself. It works by getting the LLM to generate some dialog and send that along with text the user has highlighted to another template. That template takes an action and feeds into another template, and so on and so on. Note: we're using gpt-4o-mini-1106 as a model here and in some of the subsequent templates in this chain. When this model is retired it will break things and require updating. #]You are an actor playing the role of a helpful writing assistant. In this scene you will interact with a writer. You will ask them some questions about some copy they are working on. You're goal is to ask them enough question such that their answers can be used to expand on the existing text. That is, you want them to give you things one could use to expand on the existing text. As this is a dialogue, we will present it in the form of a transcript. The writer will start by reading what they have so far. 
 
 WRITER: {{highlighted}}
 
 Think about how your character would respond and craft an appropriate reply. You will provide the text of this reply along with one other piece of information as a JSON object. The object will have two key-value pairs. The first key-value pair's key is "transcript" and the value is that of the transcript above, starting with "WRITER:" and followed by the text of their copy. Be sure to escape an quotation marks. The second key-value pair has a key called "reply" and its value is the response you crafted above (i.e., it is the text of your character's reply to the above, your first question for the writer). Include only the text of your reply (e.g., do NOT preface the text with the name of the speaker).
 
 ```
-Output Type: `LLM`,  Model: `gpt-3.5-turbo-1106`,  Temperature: `0.7`,  Max Tokens: `250`,  JSON: `Yes`,  Output To `Hidden`,  Post-run Behavior: `Role Play 1`,  Hide Button: `unchecked`  
+Output Type: `LLM`,  Model: `gpt-4o-mini-1106`,  Temperature: `0.7`,  Max Tokens: `250`,  JSON: `Yes`,  Output To `Hidden`,  Post-run Behavior: `Role Play 1`,  Hide Button: `unchecked`  
 
 [jump to top](#lit-prompts)
 
@@ -342,7 +343,7 @@ Output Type: `Prompt`,  Model: `n/a`,  Temperature: `n/a`,  Max Tokens: `n/a`,  
 Think about how your character would respond and craft an appropriate reply. You will provide the text of this reply along with one other piece of information as a JSON object. The object will have two key-value pairs. The first key-value pair's key is "transcript" and the value is that of the transcript above, starting with "WRITER:" the text of their copy and the subsequent questions and answers. Be sure to escape an quotation marks. And DO NOT repeat yourself (i.e., ask new questions). The second key-value pair has a key called "reply" and its value is the response you crafted above (i.e., it is the text of your character's reply to the above, your question for the writer). Make sure it's a question. Include only the text of your reply (e.g., do NOT preface the text with the name of the speaker).
 
 ```
-Output Type: `LLM`,  Model: `gpt-3.5-turbo-1106`,  Temperature: `0.7`,  Max Tokens: `2000`,  JSON: `Yes`,  Output To `Hidden`,  Post-run Behavior: `Role Play 3`,  Hide Button: `checked`  
+Output Type: `LLM`,  Model: `gpt-4o-mini-1106`,  Temperature: `0.7`,  Max Tokens: `2000`,  JSON: `Yes`,  Output To `Hidden`,  Post-run Behavior: `Role Play 3`,  Hide Button: `checked`  
 
 [jump to top](#lit-prompts)
 
@@ -365,7 +366,7 @@ Output Type: `Prompt`,  Model: `n/a`,  Temperature: `n/a`,  Max Tokens: `n/a`,  
 You will provide a JSON object in response to the above with a key named `next`. In your role as a writing assistant, consider if there is enough material in the above transcript to pad the original copy by 20%. You probably need at least three or four rounds of Q&A. However, if the replies are light on content, you may need more. If you have enough material to add 20% in length to the original copy, set the value of `next` to "Role Play 5".  Otherwise, if you feel you need more, the value of `next` should be "Role Play 2".
  
 ```
-Output Type: `LLM`,  Model: `gpt-3.5-turbo-1106`,  Temperature: `0.7`,  Max Tokens: `250`,  JSON: `Yes`,  Output To `Hidden`,  Post-run Behavior: `DYNAMIC`,  Hide Button: `checked`  
+Output Type: `LLM`,  Model: `gpt-4o-mini-1106`,  Temperature: `0.7`,  Max Tokens: `250`,  JSON: `Yes`,  Output To `Hidden`,  Post-run Behavior: `DYNAMIC`,  Hide Button: `checked`  
 
 [jump to top](#lit-prompts)
 
@@ -378,7 +379,7 @@ Output Type: `LLM`,  Model: `gpt-3.5-turbo-1106`,  Temperature: `0.7`,  Max Toke
 Use what you learned above to rewrite the original copy, adding details learned above. Do your best to keep the writer's voice and style while adding relevant details from your conversation to that first entry. Do NOT embellish! Do NOT make things up! Keep your additions firmly based on the content of your conversation, and don't make your copy too long! You goal is simply to flesh out the original text (i.e., the writer's first utterance above), adding about 20% in length. That being said, provide your new longer copy below.
 
 ```
-Output Type: `LLM`,  Model: `gpt-3.5-turbo-16k`,  Temperature: `0.7`,  Max Tokens: `4000`,  JSON: `No`,  Output To `Screen + clipboard`,  Post-run Behavior: `FULL STOP`,  Hide Button: `checked` 
+Output Type: `LLM`,  Model: `gpt-4o-mini`,  Temperature: `0.7`,  Max Tokens: `4000`,  JSON: `No`,  Output To `Screen + clipboard`,  Post-run Behavior: `FULL STOP`,  Hide Button: `checked` 
 
 [jump to top](#lit-prompts)
 
@@ -387,7 +388,7 @@ Output Type: `LLM`,  Model: `gpt-3.5-turbo-16k`,  Temperature: `0.7`,  Max Token
 {{Yes?}} [# {{Yes?}} isn't a predefined variable. So, the user will be presented with a text input, and since Post-run Behavior is set to CHAT, this ends up being a plain old chat with an LLM. #]
 
 ```
-Output Type: `LLM`,  Model: `gpt-3.5-turbo-16k`,  Temperature: `0.7`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen only`,  Post-run Behavior: `CHAT`,  Hide Button: `unchecked`  
+Output Type: `LLM`,  Model: `gpt-4o-mini`,  Temperature: `0.7`,  Max Tokens: `250`,  JSON: `No`,  Output To `Screen only`,  Post-run Behavior: `CHAT`,  Hide Button: `unchecked`  
 
 [jump to top](#lit-prompts)
 
@@ -423,10 +424,11 @@ Browser Date and Time:
 
 - Day of week (0-6): {{dayOfWeek}}
 - Day of week (English): {{DayOfWeek}}
-- Month (1-12): {{month}}
+- Month (0-11): {{month}}
+- Month (1-12): {{month1}}
 - Month (01-12): {{month2d}}
 - Month (English): {{Month}}
-- Day of Month (0-31): {{day}}
+- Day of Month (1-31): {{day}}
 - Day of Month (01-31): {{day2d}}
 - Year: {{year}}
 - Hour (1-12): {{hours}}

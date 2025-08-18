@@ -396,7 +396,7 @@ function createParameterInput(labelText, inputId, dataPrompt, inputType, inputVa
             input.className = 'input-model';
             questionMark = document.createElement('span');
             questionMark.innerHTML = ` <button id="input-model-q" class="question">?</button>`;
-            questionMark.addEventListener('click', () => alert('What model should be used (e.g. gpt-3.5-turbo).'));
+            questionMark.addEventListener('click', () => alert('What model should be used (e.g. gpt-4o-mini).'));
             break;
         case 'temperature':
             input.step = (inputType === 'number') ? '0.01' : '1';
@@ -610,7 +610,7 @@ function addNewPrompt() {
     const newPromptName = `New Prompt ${promptList.childElementCount + 1}`;
     const newPromptId = createPromptElement(newPromptName, {
         prompt: '',
-        model: 'gpt-3.5-turbo',
+        model: 'gpt-4o-mini',
         temperature: 0.7,
         max_tokens: 250,
         output: 1,
@@ -673,11 +673,11 @@ document.addEventListener('DOMContentLoaded', () => {
 function build_export(encrypted_key,pwd=null) {
     fileText = popupHTML
     fileText = fileText.replace(`</title>`,`</title>\n<script>\n\nlocalStorage.setItem('templates',JSON.stringify(`+localStorage.templates+`));\n`);
-    fileText = fileText.replace(`<script src="js/spin.js?v=0.2.0"></script>`,`\n`+spinJS)
-    fileText = fileText.replace(`<script src="js/functions.js?v=0.2.0"></script>`,`\n`+functionsJS)
-    fileText = fileText.replace(`<script src="js/prompts.js?v=0.2.0"></script>`,`\n`+promptsJS)
-    fileText = fileText.replace(`<script src="js/popup.js?v=0.2.0"></script>`,`\n`+popupJS)
-    fileText = fileText.replace(`<link rel="stylesheet" type="text/css" href="css/popup.css?v=0.2.0">`,`</script>\n<style>\n`+popupCSS+`\n</style>`)
+    fileText = fileText.replace(`<script src="js/spin.js?v=0.2.1"></script>`,`\n`+spinJS)
+    fileText = fileText.replace(`<script src="js/functions.js?v=0.2.1"></script>`,`\n`+functionsJS)
+    fileText = fileText.replace(`<script src="js/prompts.js?v=0.2.1"></script>`,`\n`+promptsJS)
+    fileText = fileText.replace(`<script src="js/popup.js?v=0.2.1"></script>`,`\n`+popupJS)
+    fileText = fileText.replace(`<link rel="stylesheet" type="text/css" href="css/popup.css?v=0.2.1">`,`</script>\n<style>\n`+popupCSS+`\n</style>`)
 
     fileText = fileText.replace(`function resize(e,disable=0){`,`function resize(e,disable=1){`)
     
@@ -701,11 +701,11 @@ function build_export(encrypted_key,pwd=null) {
 function build_export_w_scrtach(encrypted_key,pwd=null) {
     fileText = popupHTML
     fileText = fileText.replace(`</title>`,`</title>\n<script>\n\nlocalStorage.setItem('templates',JSON.stringify(`+localStorage.templates+`));\n`);
-    fileText = fileText.replace(`<script src="js/spin.js?v=0.2.0"></script>`,spinJS)
-    fileText = fileText.replace(`<script src="js/functions.js?v=0.2.0"></script>`,functionsJS)
-    fileText = fileText.replace(`<script src="js/prompts.js?v=0.2.0"></script>`,promptsJS)
-    fileText = fileText.replace(`<script src="js/popup.js?v=0.2.0"></script>`,popupJS)
-    fileText = fileText.replace(`<link rel="stylesheet" type="text/css" href="css/popup.css?v=0.2.0">`,`</script>\n<style>\n`+popup_scratchCSS+`\n</style>`)
+    fileText = fileText.replace(`<script src="js/spin.js?v=0.2.1"></script>`,spinJS)
+    fileText = fileText.replace(`<script src="js/functions.js?v=0.2.1"></script>`,functionsJS)
+    fileText = fileText.replace(`<script src="js/prompts.js?v=0.2.1"></script>`,promptsJS)
+    fileText = fileText.replace(`<script src="js/popup.js?v=0.2.1"></script>`,popupJS)
+    fileText = fileText.replace(`<link rel="stylesheet" type="text/css" href="css/popup.css?v=0.2.1">`,`</script>\n<style>\n`+popup_scratchCSS+`\n</style>`)
 
     fileText = fileText.replace(`window.scrollTo(0, 0);`,`document.getElementById('inner_wrapper').scrollTo(0, 0);`)
     fileText = fileText.replace(`var getScrollTopDocumentAtBegin = document.documentElement.scrollTop + document.body.scrollTop`,`var getScrollTopDocumentAtBegin = document.getElementById('inner_wrapper').scrollTop + document.body.scrollTop`)    

@@ -462,7 +462,8 @@ function choose_prompt(choice) {
       llm_prompt = llm_prompt.replace(/{{DayOfWeek}}/g, day_list[d.getDay()]); // english
       const month_list = ["January","February","March","April","May","June","July","August","September","October","November","December"];
       llm_prompt = llm_prompt.replace(/{{month}}/g, d.getMonth()); // number
-      llm_prompt = llm_prompt.replace(/{{month2d}}/g, ('0'  + d.getMonth()).slice(-2)); // number
+      llm_prompt = llm_prompt.replace(/{{month1}}/g, d.getMonth()+1); // number
+      llm_prompt = llm_prompt.replace(/{{month2d}}/g, ('0'  + (d.getMonth()+1)).slice(-2)); // number
       llm_prompt = llm_prompt.replace(/{{Month}}/g, month_list[d.getMonth()]); // english
       llm_prompt = llm_prompt.replace(/{{day}}/g, d.getDate()); // day of month
       llm_prompt = llm_prompt.replace(/{{day2d}}/g, ('0'  + d.getDate()).slice(-2)); // day of month
