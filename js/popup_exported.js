@@ -18,16 +18,18 @@ function getSelectionFromPage() {
     }
   }
   let body_text = document.getElementById('scratch_pad').value;
+  let body_html = body_text;
 
+  let run_location = "location unknown";
   try {
-    let run_location = window.location.toString();    
+    run_location = window.location.toString();
   } catch (error) {
-    let run_location = "location unknown";
+    // Keep fallback.
   }
 
   console.log(selectedText,body_text,run_location)
 
-  return [selectedText,body_text,run_location]
+  return [selectedText,body_text,run_location,body_html]
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -48,9 +50,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // Add event listener to button
       button.addEventListener('mousedown', function() {
-        text_arry = getSelectionFromPage(); selectedText = text_arry[0]; bodyText = text_arry[1];
+        text_arry = getSelectionFromPage(); selectedText = text_arry[0]; bodyText = text_arry[1]; run_location = text_arry[2] || ""; bodyHTML = text_arry[3] || "";
       });
       button.addEventListener('click', function() {
+        start_new_popup_run();
         choose_prompt(this.dataset.choice); // 'this' refers to the button clicked
       });
 
@@ -87,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
           const contents = e.target.result;
           try {
               document.getElementById('scratch_pad').value = contents
-              localStorage.setItem('scratch_pad', contents);
+              setScratchText(contents);
               //const json = JSON.parse(contents);
               //updatePromptsFromJson(json); // Function to update prompts
           } catch (error) {
@@ -100,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var save_scratch = document.getElementById('save_scratch');
   save_scratch.addEventListener('click', function() {
-      saveTextAsFile(document.getElementById('scratch_pad').value,"scratch_pad.txt")
+      saveTextAsFile(document.getElementById('scratch_pad').value, timestampedDownloadFilename("scratch_pad_", "txt", new Date()))
   });
 
 });

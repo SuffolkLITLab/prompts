@@ -2,8 +2,9 @@
 		box-sizing: border-box;
 	}
 
-	input:focus, textarea {
-		outline: none;
+	input:focus-visible, textarea:focus-visible, button:focus-visible, select:focus-visible, a:focus-visible {
+		outline: 2px solid #1d4ed8;
+		outline-offset: 2px;
 	}
 
 	body {

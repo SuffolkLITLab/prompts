@@ -1,35 +1,42 @@
-// Get the selected text
+// Get the selected text and page context. selection_capture.js is injected
+// immediately before this file and is also available from the persistent
+// content-script tracker on normal http(s) pages.
 function getSelectionFromPage() {
-  let selectedText = window.getSelection().toString();
-      
-  if (selectedText.length === 0) {
-    const focusedElement = document.activeElement;
+  let selectedText = '';
+  let selectionSource = '';
 
-    if (focusedElement) {
-      if (focusedElement.tagName.toLowerCase() === 'textarea' || focusedElement.tagName.toLowerCase() === 'input') {
-        if (typeof focusedElement.selectionStart === 'number' && typeof focusedElement.selectionEnd === 'number') {
-          selectedText = focusedElement.value.substring(focusedElement.selectionStart, focusedElement.selectionEnd);
-        } else if (focusedElement.selectionStart === undefined) {
-          // For input elements in some browsers like Firefox
-          const selection = focusedElement.value.substring(
-            focusedElement.selectionStart, focusedElement.selectionEnd
-          );
-          if (selection) {
-            selectedText = selection;
-          }
-        }
-      }
-    }
+  if (typeof LitSelectionCapture !== 'undefined') {
+    const captured = LitSelectionCapture.captureSelection(document, window, { allowCached: true });
+    selectedText = captured.text || '';
+    selectionSource = captured.source || '';
+  } else {
+    try {
+      selectedText = window.getSelection().toString();
+    } catch (error) {}
   }
-  body_text = document.body.innerText;
+
+  const body_text = document.body ? document.body.innerText : "";
+  const body_html = document.body ? document.body.innerHTML : "";
+  let run_location = "location unknown";
   try {
-    run_location = window.location.toString();    
+    run_location = window.location.toString();
   } catch (error) {
-    run_location = "location unknown";
+    // Keep the fallback above.
   }
-  
-  console.log(selectedText,body_text,run_location)
 
-  return [selectedText,body_text,run_location]
+  return [selectedText, body_text, run_location, body_html, {
+    selectionSource: selectionSource,
+    googleDocs: typeof LitSelectionCapture !== 'undefined' && LitSelectionCapture.isGoogleDocs(window)
+  }];
 }
-chrome.runtime.sendMessage({selectedText:getSelectionFromPage()})
+
+var __litActivePageContext = getSelectionFromPage();
+if (typeof LitPlatform !== 'undefined') {
+  // Keep the historical message path for the top frame only. Popup capture now
+  // uses executeScript(allFrames) so iframe selections do not overwrite the
+  // top-level page text through competing runtime messages.
+  try {
+    if (window === window.top) LitPlatform.sendMessage({ selectedText: __litActivePageContext });
+  } catch (error) {}
+}
+__litActivePageContext;

@@ -1,5 +1,7 @@
 # LIT Prompts
 
+**Current version: 0.2.39.** See `CHANGELOG.md` for release notes.
+
 _**Install the extension [for Firefox](https://addons.mozilla.org/en-US/firefox/addon/lit-prompts/) or [for Chrome](https://chromewebstore.google.com/detail/lit-prompts/hfeojjmldhebkeknfapoghcohkhffcmp).**_
 
 LIT Prompts is a browser extension that generates LLM prompts based on user-authored templates. It is a project of Suffolk University Law School's [Legal Innovation & Technology (LIT) Lab](https://suffolklitlab.org/). It was designed to help students explore [prompt engineering](https://suffolklitlab.org/). Users can create and save prompt templates for use within the extension. These templates can use data from your active browser window (e.g., selected text or the whole text of a webpage) as well as text input provided by you. They can also feed into each other, allowing one to create complex interactions. For example, you can make interactions that:
@@ -22,11 +24,36 @@ Here's a ~7 min [video](https://www.youtube.com/watch?v=Ql8aXGvLBGU) showing how
 
 [![YouTube Preview Image](docs/images/yt_addon_preview.png)](https://www.youtube.com/watch?v=Ql8aXGvLBGU)
 
-# OpenAI-Compatible API Integration
+# Firefox and Chrome groundwork
 
-To run your interactions, you'll need to point to the [API](https://en.wikipedia.org/wiki/API) for a [Large Language Model](https://en.wikipedia.org/wiki/Large_language_model) (LLM). You can use an OpenAI endpoint/base (i.e., `https://api.openai.com/v1/chat/completions`) along with an OpenAI API key, _**OR you can use ANY endpoint that makes use of the same format!**_ For example, you could download something like [LM Studio](), spin up a local LLM, and point this extension at `localhost` (keeping your data on your computer). Alternatively, you could use a tool like [vLLM](https://docs.vllm.ai/en/latest/index.html) to spin up an OpenAI-compatible API server and point at that. 
+Firefox and Chrome are packaged from the same browser-neutral source tree. Browser-specific WebExtension behavior lives behind `js/platform.js`; the release ZIPs are expected to be identical except for `manifest.json`. Browser manifests live in `manifests/manifest.firefox.json` and `manifests/manifest.chrome.json`, and `tools/build_extension.py` packages either browser from the same source.
 
-[jump to top](#lit-prompts)
+Firefox and Chrome differ most around background execution and user-supplied JavaScript: Firefox uses `background.scripts` and an optional `userScripts` permission, while the prepared Chrome manifest uses a Manifest V3 service worker and an install-time `userScripts` permission. See [Browser portability](docs/BROWSER_PORTABILITY.md) for the development conventions and build commands.
+
+# LLM API Integration
+
+LIT Prompts keeps provider selection out of the UI. Enter a complete API endpoint, an API key when required, and the model name expected by that endpoint. Endpoint paths ending in `/messages` use the Anthropic Messages API shape; paths ending in `/responses` use the OpenAI Responses API shape; `/chat/completions` and unknown/legacy endpoints use the existing OpenAI-compatible Chat Completions shape. This supports local LM Studio/vLLM servers on `localhost` or a LAN IP, Google Gemini's OpenAI-compatible endpoint, GPT-4 and GPT-5 through OpenAI, Anthropic's compatibility endpoint, and native Anthropic `/v1/messages` from the same template engine.
+
+Template files remain backward compatible. The historical `temperature` and `max_tokens` keys are still read and written. Blank Temperature means Auto/provider default, while the adapter translates `max_tokens` as a provider-neutral output cap: OpenAI Responses receives `max_output_tokens`; direct OpenAI reasoning models on Chat receive `max_completion_tokens`; GPT-4-family, compatible Chat, and native APIs continue to receive `max_tokens`. Optional `reasoning_effort` and `verbosity` fields are additive; old prompt files that do not contain them behave as Auto and continue to load normally. Direct OpenAI known model families get precise capability handling: GPT-5-family models expose reasoning and verbosity controls, o-series models expose reasoning, and GPT-4/legacy sampling models keep ordinary sampling controls. Unknown future model names on direct OpenAI endpoints optimistically expose optional reasoning and verbosity controls; Auto omits those fields, and Temperature remains available until an explicit reasoning effort is selected. Generic compatible endpoints are conservative and do not receive the OpenAI-specific advanced fields, preserving their historical request shape. The settings UI displays a live capability status in its own row beneath each prompt textarea.
+
+Structured JSON is also translated by protocol. Chat Completions uses `response_format`; OpenAI Responses uses `text.format`; native Anthropic `/messages` uses `output_config.format`. See the in-extension *Templates & Settings* page for examples and details.
+
+### 0.2.11
+
+- Moved each prompt's live Capabilities status into a full-width row between the prompt textarea and Output Type for a cleaner Templates and Prompts layout.
+
+### 0.2.10
+
+- Fixed a false Scratch Pad conflict warning that could appear when the Scratch Pad window first opened.
+- Kept the Scratch Pad comparison baseline synchronized after typing and loading a scratch file.
+
+### 0.2.9
+
+- Improved popup code rendering for mixed prose and multiple fenced code blocks.
+- Added code cards with language labels, Copy, Wrap, and Expand controls.
+- Added lightweight syntax highlighting and automatic pretty-printing for valid JSON.
+- Preserved code controls in saved transcripts and standalone HTML exports.
+
 
 ## Using OpenAI with LIT Prompts
 
@@ -57,19 +84,21 @@ After opening [LM Studio](https://lmstudio.ai/) and downloading a model/models.
 
 # Export Interactions to HTML
 
-You can export runnable versions of your interactions to one of two HTML output types: (1) a page that replicates this extension's "popup," the window with buttons that appears when you click the extension; or (2) a page that replicates both the "popup" and the "Scratch Pad." See the extension's _Templates & Settings_ screen for details. 
+You can export runnable versions of your interactions to one of two HTML output types: (1) a page that replicates this extension's "popup," the window with buttons that appears when you click the extension; or (2) a page that replicates both the "popup" and the "Scratch Pad." See the extension's _Templates & Settings_ screen for details.  If an API key is configured, exports can optionally password-encrypt the embedded key; the password itself is not stored in the exported HTML. Leaving the password blank preserves the original unprotected embedded-key behavior.
 
 [jump to top](#lit-prompts)
 
 # Prompt Templates
 
-When crafting a template, use a mix of plain language and variable placeholders. Specifically, you can use double curly brackets to encase predefined variables and prompts for your user. If the text between the brackets matches one of our predefined variables, that section of text will be replaced with its content. For example, `{{highlighted}}` will be replaced by any selected/highlighted text on your current page, `{{innerText}}` will be replaced by the [innerText](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText) of your current page (roughly speaking the hard-coded text of a page), and `{{scratch}}` will be replaced with the contents of your Scratch Pad. If the text within brackets is not a predefined variable, like  `{{What is your name?}}`, it will trigger a user prompt for your user that echo's its content (e.g., a text bubble containing, "What is your name?"). After the user answers, their reply will replace this placeholder (i.e., `{{What is your name?}}`). A list of predefined variables can be found in the sample templates: [Variables "random outcomes" and "time"](#variables-random-outcomes-and-time) and [Variables "from this page"](#variables-from-this-page). 
+When crafting a template, use a mix of plain language and variable placeholders. Specifically, you can use double curly brackets to encase predefined variables and prompts for your user. If the text between the brackets matches one of our predefined variables, that section of text will be replaced with its content. For example, `{{highlighted}}` will be replaced by selected/highlighted text from the active tab when the popup is triggered (including a selection inside the LIT Prompting Scratch Pad), `{{innerText}}` will be replaced by the [innerText](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText) of your current page (roughly speaking the hard-coded text of a page); when the Scratch Pad is the active tab, `{{innerText}}` equals the full Scratch Pad contents, and `{{scratch}}` will be replaced with the contents of your Scratch Pad. If the text within brackets is not a predefined variable, like  `{{What is your name?}}`, it will trigger a user prompt for your user that echo's its content (e.g., a text bubble containing, "What is your name?"). After the user answers, their reply will replace this placeholder (i.e., `{{What is your name?}}`). A list of predefined variables can be found in the sample templates: [Variables "random outcomes" and "time"](#variables-random-outcomes-and-time) and [Variables "from this page"](#variables-from-this-page). 
 
 Use the inputs after a template's name and body to set parameters. If you use the _Post-run Behavior_ to send one template's output to another template, the first template's output can be read by the second template via the `{{passThrough}}` variable. If this value is valid JSON, you can access individual elements by calling specific keys (e.g., `{{passThrough["key name"]}}`. When using the "DYNAMIC" setting for _Post-run Behavior_ the prompt found in `{{passThrough["next"]}}` will be triggered.
 
 For a crash course on how everything fits together, you can read through this set of [sample templates](#sample-templates) below in order. For more detail, read the next section [Prompt Execution](#prompt-execution).
 
 Note: You can explore and contribute to our [library of templates](templates) (pre-written template files you can upload here).
+
+Prompt downloads use timestamped JSON filenames such as `lit_prompts_2026-08-10T15.05.json`. The prompt uploader accepts both these `.json` files and legacy `.txt` prompt exports. Uploads merge into the current template set rather than replacing it; duplicate names receive numeric suffixes and imported prompt-chain references are kept aligned with any renamed targets. The Templates & Settings page also includes a non-destructive filter for narrowing visible templates by name, prompt text, model, or endpoint. Scratch Pad downloads use the same local-date/time convention while remaining plain text, for example `scratch_pad_2026-08-10T15.05.txt`.
 
 [jump to top](#lit-prompts)
 
@@ -116,12 +145,15 @@ When you run a template prompt with the LIT Prompts extension this is what happe
 9. After the template has been processed the behavior of your interaction is defined by the parameters found below the template text on _Templates & Settings_.
     - **Output Type:** When you run this prompt template, should it echo back the text of the prompt or an LLM's reply?  
     - **Model:** What model should be used (e.g. gpt-4o-mini). (N/A if Output Type is Prompt)
-    - **Temperature:** How "random" should replies be (0-1), where 0 is very predictable and 1 is the most unpredictable. (N/A if Output Type is Prompt)
-    - **Max Tokens:** Max number of tokens to include in your answer. 1 token ~= 1.7 words. Smaller answers are quicker (and less expensive). (N/A if Output Type is Prompt) 
+    - **Temperature:** Optional sampling temperature. Leave blank for Auto/provider default. OpenAI accepts 0-2; some reasoning models do not use temperature while reasoning is active. (N/A if Output Type is Prompt/JavaScript)
+    - **Max Output Tokens:** Optional output cap. Prompt files retain the historical `max_tokens` key, which the adapter translates for the selected endpoint/model family. (N/A if Output Type is Prompt/JavaScript)
+    - **Reasoning Effort:** Optional OpenAI reasoning control. Auto omits the field; available explicit values depend on the selected model.
+    - **Verbosity:** Optional GPT-5 response-detail control. Auto omits the field; Low, Medium, and High are available when supported.
     - **JSON:** If your model supports JSON Mode, we will turn on JSON Mode, if not, we will alert you when output isn't proper JSON.
     - **Output To:** Decide where output should go (e.g., to the screen or the screen and the clipboard). 
-    - **Post-run Behavior:** After this prompt template is run, what next? Should we stop, save the output to a file, chat, or trigger another prompt template? Note: if you choose DYNAMIC, this will trigger the prompt found in `{{passThrough["next"]}}`. See above for a discussion of variables.
+    - **Post-run Behavior:** After this prompt template is run, what next? Should we stop, save the output to a file, chat, close the popup, or trigger another prompt template? **SAVE TO FILE** downloads the output and then clears/closes the popup just like **CLOSE POP-UP**. Note: if you choose DYNAMIC, this will trigger the prompt found in `{{passThrough["next"]}}`. See above for a discussion of variables.
     - Hide Button: Hide this template's button from the main list of interaction buttons.
+    - **Run in New Tab:** When a visible template is launched from the browser-extension Home screen, open a persistent interaction tab and run it there. This setting is disabled while Hide Button is checked and does not apply to prompts reached through Post-run Behavior handoffs. The original page context is captured before the tab opens, and the toolbar popup resets/closes after the handoff.
 
 [jump to top](#lit-prompts)
 
@@ -458,14 +490,47 @@ Page Data:
 - Highlighted text: {{highlighted}}
 - Page words: {{nWordsOnPage}}
 - innerText of page: {{innerText}}
+- innerHTML of page body: {{innerHTML}}
+- page URL: {{location}}
 
 ```
 Output Type: `Prompt`,  Model: `n/a`,  Temperature: `n/a`,  Max Tokens: `n/a`,  JSON: `No`,  Output To `Screen only`,  Post-run Behavior: `FULL STOP`,  Hide Button: `unchecked`  
 
 [jump to top](#lit-prompts)
 
+
+# Additional features in this build
+
+This build also includes persistent popup transcript/session state, per-template JSON Schema configuration for structured output, a JavaScript template output type using the browser `userScripts` API, Firefox/Chrome portability scaffolding, and endpoint-driven API adapters for OpenAI-compatible services and the native Anthropic Messages API. See **Templates & Settings** in the extension for the current usage details.
+
+For templates that need to keep running while you work elsewhere, **Run in New Tab** opens a persistent extension interaction tab when that template is launched from Home. Multiple interaction tabs use isolated restore state, and JavaScript templates continue targeting the original source tab.
+
+Post-run Behavior also includes **CLOSE POP-UP**. It completes the current prompt like **FULL STOP**, then clears the popup's persisted transcript/session state and closes the popup. **SAVE TO FILE** now follows the same cleanup behavior after triggering its download. The next time the extension popup is opened, it starts back at the Home/template-button screen. Scratch Pad contents and saved settings are not cleared.
+
 # Privacy Policy
 
 This extension does not share user data with its authors. However, this extension is capable of submitting data to OpenAI-compatible API services. It only sends data to endpoints defined by the user. One can use an OpenAI endpoint (i.e., https://api.openai.com/v1/chat/completions), OR one can use ANY endpoint that makes use of the same format. For example, users could download something like LM Studio, spin up a local LLM, and point this extension at localhost (keeping their data on their computer). Alternatively, they could use a tool like vLLM to spin up an OpenAI-compatible API server and point at that. Consequently, if users make use of an API provider, information they send using this extension is subject to that provider's privacy policy.
 
 [jump to top](#lit-prompts)
+
+
+### Per-prompt endpoints and API-key routing
+
+Each template can optionally save an `endpoint` value. A blank or missing `endpoint` remains fully backward compatible and uses the Default API Endpoint (`localStorage.api_base`). API keys are intentionally not stored in prompt/template files. Instead, LIT Prompting keeps a persistent endpoint-to-key registry in `localStorage.api_keys`, with the Default API Endpoint represented in that same registry just like every other endpoint. On upgrade, the historical `localStorage.api_key` value is migrated once to the current default endpoint and then removed, leaving a single credential source of truth.
+
+Changing a prompt endpoint immediately recalculates which model controls apply. The settings page shows the Default API Endpoint in the same endpoint/key list as every other endpoint. It retains endpoint/key entries even after no prompt references them, with an explicit × control for removing entries that are neither the current default nor referenced by a prompt. **Force Default Endpoint on All** and **Force Default Model on All** provide confirmed bulk updates when providers or model names change.
+
+
+### Extension-page active context
+
+When the Scratch Pad is the active tab, `{{highlighted}}` uses its live selection and `{{innerText}}` equals the full Scratch Pad. When Templates & Settings or a persistent interaction tab is the active tab, `{{highlighted}}`, `{{innerText}}`, and `{{innerHTML}}` reflect that page's live selection, visible text, and body HTML. The popup requests this context directly from the active LIT page, with saved snapshots only as a fallback where applicable, so opening the toolbar popup immediately after selecting or editing text does not lose context.
+
+For normal webpages, LIT Prompting tracks selection in every frame before focus moves to the toolbar popup. This improves compatibility with iframe-backed rich editors. Google Docs-family editors receive additional annotated-canvas/accessibility selection handling because their visible document selection is not always exposed through the standard DOM selection APIs. If those non-clipboard methods still return nothing and the chosen prompt actually uses `{{highlighted}}` or `{{nSelectedWords}}`, the extension can request optional clipboard read/write access and use the editor's native Copy operation as a final fallback. The clipboard is snapshotted and restored immediately after capture; this fallback is not used when ordinary selection capture succeeds.
+
+
+### Interaction logs
+The browser-extension popup includes a **LOGS** link beside **SAVE TRANSCRIPT**. Logs are hidden by default and record the template flow, resolved prompt, provider request/response details, and Post-run Behavior used for the current run. Each prompt invocation and each API interaction is a separate top-level collapsed header; chat turns, continuations, retries, and prompt-to-prompt handoffs are labeled so multi-step flows can be scanned without expanding every section. API keys and request-header values are always redacted. Saved transcript HTML includes the same hidden-by-default logs. Standalone `interactions.html` and `interactions_w_scratch.html` exports intentionally exclude the LOGS UI, log persistence, and logging runtime code.
+
+### Model inheritance in prompt definitions
+
+A blank per-template `model` value is stored as blank and inherits the current Default Model only when the prompt is evaluated. Built-in prompt records in `js/functions.js` are no longer rewritten to contain the Default Model; only **Force Default Model on All** intentionally materializes that value into each template.

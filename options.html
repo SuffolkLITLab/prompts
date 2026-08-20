@@ -1,77 +1,138 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8"> 
+    <meta charset="UTF-8">
     <title>Prompt Templates &amp; Settings</title>
-    <link rel="stylesheet" href="css/options.css?v=0.2.1" />
-    <script src="js/functions.js?v=0.2.1"></script>
-    <script src="js/options.js?v=0.2.1"></script>
+    <link rel="stylesheet" href="css/options.css" />
+    <script src="js/platform.js"></script>
+    <script src="js/functions.js"></script>
+    <script src="js/api_adapters.js"></script>
+    <script src="js/options.js"></script>
   </head>
   <body style="padding:5px 20px 40px 20px;">
 
     <h2>LIT Prompts</h2>
 
-    <p style="background:#ffef94;padding: 10px 15px;border: 1px solid #a6a6a6;">
-      For help learning how to write prompts, I suggest checking out <a href="https://sadlynothavocdinosaur.com/posts/50-days-of-lit-prompts/" target="_blank">50-Days of LIT Prompts</a>. You don't have to work through every example, but working through the first few exercises will set you up for success. Also, some of the later examples are <a href="https://sadlynothavocdinosaur.com/posts/word-processor/" target="_blank">pretty cool</a>. 
+    <p style="background:#ffef94;padding:10px 15px;border:1px solid #a6a6a6;">
+      For help learning how to write prompts, see <a href="https://sadlynothavocdinosaur.com/posts/50-days-of-lit-prompts/" target="_blank">50 Days of LIT Prompts</a>. The first few exercises are a useful introduction, and later examples show more elaborate workflows.
     </p>
 
-    <p>This browser extension is a project of Suffolk University Law School's <a href="https://suffolklitlab.org/" target="_blank">Legal Innovation &amp; Technology (LIT) Lab</a>. It was designed to help students explore <a href="https://en.wikipedia.org/wiki/Prompt_engineering" target="_blank">prompt engineering</a>. Below you can create and save prompt templates for use by this extension. These templates can use data from your active browser window (e.g., selected text or the whole text of a webpage) as well as text input provided by you. They can also feed into each other, allowing one to create complex interactions. For example, you can make interactions that:</p>
+    <p>This browser extension is a project of Suffolk University Law School's <a href="https://suffolklitlab.org/" target="_blank">Legal Innovation &amp; Technology (LIT) Lab</a>. It was designed to help students explore <a href="https://en.wikipedia.org/wiki/Prompt_engineering" target="_blank">prompt engineering</a> and the operation of <a href="https://en.wikipedia.org/wiki/Large_language_model" target="_blank">Large Language Models (LLMs)</a>, including their use in larger <a href="https://en.wikipedia.org/wiki/Agent_harness" target="_blank">AI systems</a>. Below you can create and save prompt templates for use by this extension. These templates can use data from your active browser window (e.g., selected text or the whole text of a webpage) as well as text input provided by you. They can also feed into each other, allowing one to create complex interactions. For example, you can make interactions that:</p>
     <ul>
       <li>Summarize and ask questions of a webpage (e.g., What are the main conclusions of this article? What did <i>so and so</i> say about <i>this</i> or <i>that</i>?). <a href="https://github.com/SuffolkLITLab/prompts/tree/main#summarize--question-this-page" target="_projectPage" class="example">sample</a></li>
       <li>Draft an email reply responding to selected text. Then place it in your clipboard ready to paste into an email. <a href="https://github.com/SuffolkLITLab/prompts/tree/main#politely-decline-an-email-selected-text" target="_projectPage" class="example">sample</a></li>      
-      <li>Define a selected word or phrase, appending the definition to your local <a href="scratch.html" target="_blank">Scratch Pad</a>. <a href="https://github.com/SuffolkLITLab/prompts/tree/main#define-selected-wordphrase" target="_projectPage" class="example">sample</a></li>
+      <li>Define a selected word or phrase, appending the definition to a local Scratch Pad. <a href="https://github.com/SuffolkLITLab/prompts/tree/main#define-selected-wordphrase" target="_projectPage" class="example">sample</a></li>
       <li>Save contents of Scratch Pad to a file. <a href="https://github.com/SuffolkLITLab/prompts/tree/main#save-scratch-pad-to-file" target="_projectPage" class="example">sample</a></li>
       <li>Summarize and ask questions of text in the Scratch Pad (e.g., you could cut-and-paste content into the Scratch Pad when it's not available on a webpage). <a href="https://github.com/SuffolkLITLab/prompts/tree/main#summarize--question-scratch-pad" target="_projectPage" class="example">sample</a></li>
       <li>Return a structured representation of a string's sentence structure (i.e., "diagram" a sentence in JSON). <a href="https://github.com/SuffolkLITLab/prompts/tree/main#diagram-selected-sentence" target="_projectPage" class="example">sample</a></li>
-      <li>Translate selected text from one language into another. Then draft a reply in the original language. <a href="https://github.com/SuffolkLITLab/prompts/tree/main#translate--reply-in-original-language" target="_projectPage" class="example">sample</a></li>
+      <li>Translate selected text from one language into another. Then draft a reply in the original language. <a href="https://github.com/SuffolkLITLab/prompts/tree/main#translate--reply-in-orginal-language" target="_projectPage" class="example">sample</a></li>
       <li>Flip a virtual coin and write a short poem based on the outcome. <a href="https://github.com/SuffolkLITLab/prompts/tree/main#coin-flip-to-poem" target="_projectPage" class="example">sample</a></li>
-      <li>Shorten selected text. <a href="https://github.com/SuffolkLITLab/prompts/tree/main#shorten-selected-text" target="_projectPage" class="example">sample</a></li>
       <li>Expand/build on selected text (i.e., have an LLM ask you questions to flesh out some text). <a href="https://github.com/SuffolkLITLab/prompts/tree/main#expand-selected-short-text" target="_projectPage" class="example">sample</a></li>
       <li>BS with the LLM of your choice. <a href="https://github.com/SuffolkLITLab/prompts/tree/main#bs-with-a-bot" target="_projectPage" class="example">sample</a></li>
     </ul>
-    Note: you can use the template feature without engaging an <a href="https://en.wikipedia.org/wiki/Large_language_model" target="_blank">LLM</a> to produce simple fill-in-the blank output (i.e., traditional form letters). <a href="https://github.com/SuffolkLITLab/prompts/tree/main#generic-form-letter-no-llm" target="_projectPage" class="example">sample</a>
+    Note: you can use the template feature without engaging an LLM to produce simple fill-in-the blank output (i.e., traditional form letters). <a href="https://github.com/SuffolkLITLab/prompts/tree/main#generic-form-letter-no-llm" target="_projectPage" class="example">sample</a>
 
-    <h3>OpenAI-Compatible API Integration</h3>
-    <p>To <i>run</i> your interactions, you'll need to point to the <a href="https://en.wikipedia.org/wiki/API" target="_blank">API</a> for a <a href="https://en.wikipedia.org/wiki/Large_language_model" target="_blank">Large Language Model</a> (LLM). See e.g., <a href="https://github.com/SuffolkLITLab/prompts/tree/main#using-openai-with-lit-prompts" target="_blank">Using OpenAI with LIT Prompts</a>. If we run into an error when using the API info below, this extension will suggest that you check these credentials. You can use an OpenAI endpoint/base (i.e., <code>https://api.openai.com/v1/chat/completions</code>) along with an <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI API key</a>, <i><b>OR you can use ANY endpoint that makes use of the same format!</b></i> For example, you could download something like <a href="https://lmstudio.ai/" target="_blank">LM Studio</a>, spin up a local LLM, and point this extension at <code>localhost</code> (keeping your data on your computer). See e.g., <a href="https://github.com/SuffolkLITLab/prompts/tree/main#using-lm-studio-with-lit-prompts" target="_blank">Using LM Studio with LIT Prompts</a>. Alternatively, you could use a tool like <a href="https://docs.vllm.ai/en/latest/index.html" target="_blank">vLLM</a> to spin up an OpenAI-compatible API server and point at that</a>. <i>If you use an API that lives somewhere other than on your computer (i.e., anything but <code>localhost</code>), you are sharing the contents of your prompts with the outside world. Check your API provider's privacy policy to see what they do with it.</i>
-    </p>
+    <h3>LLM API Integration</h3>
+    <p>To <i>run</i> LLM templates/prompts, provide the complete API request endpoint below, an API key when the server requires one, and a model name on each LLM template. There is intentionally no provider selector: <b>the endpoint path tells LIT Prompts which request format to use</b>. This means local servers can live on <code>localhost</code>, a LAN IP address, or any other hostname without special configuration.</p>
+    <details class="settings-help llm-endpoint-help">
+      <summary>Endpoint examples and provider details</summary>
+      <p>Endpoints ending in <code>/responses</code> use the OpenAI Responses API; endpoints ending in <code>/messages</code> use the native <a href="https://platform.claude.com/docs/en/api/overview" target="_blank">Anthropic Messages API</a>; <code>/chat/completions</code> and unknown/legacy paths use the existing OpenAI-compatible Chat Completions format. Examples:</p>
+      <ul>
+        <li><b>LM Studio / local OpenAI-compatible:</b> <code>http://localhost:1234/v1/chat/completions</code> or, from another machine, something like <code>http://192.168.1.50:1234/v1/chat/completions</code>. The API key can usually be left blank. See <a href="https://github.com/SuffolkLITLab/prompts/tree/main#using-lm-studio-with-lit-prompts" target="_blank">Using LM Studio with LIT Prompts</a>.</li>
+        <li><b>Google Gemini via OpenAI compatibility:</b> <code>https://generativelanguage.googleapis.com/v1beta/openai/chat/completions</code> with a Gemini API key and Gemini model name. See <a href="https://ai.google.dev/gemini-api/docs/openai" target="_blank">Google documentation</a>.</li>
+        <li><b>Anthropic via OpenAI compatibility:</b> <code>https://api.anthropic.com/v1/chat/completions</code> with an Anthropic API key and Claude model name. This is convenient for ordinary prompts, but Anthropic's compatibility API ignores OpenAI's <code>response_format</code>. See <a href="https://platform.claude.com/docs/en/cli-sdks-libraries/libraries/openai-sdk" target="_blank">Anthropic compatibility documentation</a>.</li>
+        <li><b>Anthropic native (recommended when using JSON Schema):</b> <code>https://api.anthropic.com/v1/messages</code>. LIT Prompts automatically switches headers, message formatting, response parsing, and structured-output formatting for this endpoint.</li>
+        <li><b>OpenAI:</b> use <code>https://api.openai.com/v1/chat/completions</code> for Chat Completions or <code>https://api.openai.com/v1/responses</code> for Responses. Known model families get model-specific controls; unfamiliar future OpenAI model names keep optional reasoning/verbosity controls, with Auto omitting those fields. See <a href="https://github.com/SuffolkLITLab/prompts/tree/main#using-openai-with-lit-prompts" target="_blank">Using OpenAI with LIT Prompts</a>.</li>
+        <li><b>Other compatible servers:</b> <a href="https://docs.vllm.ai/en/latest/index.html" target="_blank">vLLM</a>, reverse proxies, and other compatible endpoints can be entered directly. Generic endpoints use conservative compatibility mode and do not receive OpenAI-specific Reasoning Effort or Verbosity fields.</li>
+      </ul>
+    </details>
     <p>
-      <span class="creds">API Base: <input id="api_base" style="width:300px"></span>
-      <span class="creds">API Key: <input id="api_key" style="width:400px"></span>
+      <span class="creds"><label for="api_base">Default API Endpoint:</label> <input id="api_base" style="width:430px"></span>
+      <span id="api_protocol_status" class="endpoint-status" aria-live="polite"></span>
+      <span class="creds"><label for="default_model">Default Model:</label> <input id="default_model" style="width:360px"></span>
+      <span id="default_model_capability_status" class="model-capability-status default-model-capability-status" aria-live="polite"></span>
+      <span class="creds"><label for="request_timeout_seconds">Request Timeout (seconds):</label> <input id="request_timeout_seconds" type="number" min="5" max="600" step="1" style="width:80px"></span>
+      <span class="endpoint-status">LLM requests are stopped automatically after this many seconds. Default: 120.</span>
     </p>
+    <div class="bulk-default-actions">
+      <button type="button" id="forceDefaultEndpoint">Force Default Endpoint on All</button>
+      <button type="button" id="forceDefaultModel">Force Default Model on All</button>
+    </div>
+    <div id="endpoint_key_section" class="endpoint-key-section">
+      <h4>API Keys by Endpoint</h4>
+      <p class="endpoint-key-help">Every endpoint, including the Default API Endpoint, has its API key here. Endpoint entries are retained even after prompts stop using them; entries that are neither the current default nor used by a prompt can be removed by clicking an × that will appear at the end of their input.</p>
+      <div id="endpoint_key_registry"></div> 
+    </div>
     <p>
-      Model selection is done on a prompt-by-prompt basis. <span style="background: #ffef94;"><b>Keep in mind, sometimes API providers retire older models. So, if you have a prompt that stops working and the above credentials look good, you should check the model.</b> See e.g., <a href="https://platform.openai.com/docs/models" target="_blank">OpenAI's models</a>.</span>
+      Endpoint and model selection are done on a prompt-by-prompt basis. A blank prompt Endpoint uses the Default API Endpoint above, and a blank Model uses the Default Model. API keys are stored separately by endpoint rather than inside prompt files, so changing a key does not require editing every prompt. Model names are passed through exactly as entered, so use the name expected by the endpoint you selected. API providers sometimes retire or rename models.
+      <i>If you use an API that lives somewhere other than on your computer (i.e., anything but a local server such as <code>localhost</code> or a machine you control on your LAN), you are sharing the contents of your prompts with the outside service. Check your API provider's privacy policy to see what they do with it.</i>
     </p>
 
     <h3>Export to HTML</h3>
     <p>
-      You can export runnable versions of your interactions to one of two HTML output types: (1) a page that replicates this extension's "popup," the window with buttons that appears when you click the extension; or (2) a page that replicates both the "popup" and a <a href="scratch.html" target="_blank">Scratch Pad</a>. These outputs should run in any browser with access to the endpoint set above. <b>The files will include a copy, not only of the endpoint, but also the API key listed above!</b> If the <i>base</i> or <i>key</i> above are blank, the user will be prompted to enter their own values when they hit an error. If you provide a password when prompted on export, your key will be encrypted and placed behind a password. However, anyone with that password will be able to access your key. Users will NOT be able to access text from any external page. The <code>{{innerText}}</code> variable will be set equal to <code>{{scratch}}</code>, and <code>{{highlihghted}}</code> will only work on text in the Scratch Pad. Additionally, they will not include links to edit the prompts or to a stand-along Scratch Pad. See the discussion of Prompt Templates below for more context. 
+      You can export runnable versions of your interactions to one of two HTML output types: (1) a page that replicates this extension's "popup," the window with buttons that appears when you click the extension; or (2) a page that replicates both the "popup" and a <a href="scratch.html" target="_blank">Scratch Pad</a>. These outputs should run in any browser with access to the endpoint set above. <b>The files will include a copy, not only of the endpoint, but also the API key listed above!</b> If the <i>endpoint</i> or <i>key</i> above are blank, the user will be prompted to enter their own values when they hit an error. If you provide a password when prompted on export, your key will be encrypted and placed behind a password. However, anyone with that password will be able to access your key. Users will NOT be able to access text from any external page. The <code>{{innerText}}</code> and <code>{{innerHTML}}</code> variables will be set equal to <code>{{scratch}}</code>, and <code>{{highlihghted}}</code> will only work on text in the Scratch Pad. Additionally, they will not include links to edit the prompts or to a stand-along Scratch Pad. See the discussion of Prompt Templates below for more context. 
     </p>
-    <p>The content of this textarea will be appended to the top of your exports. HTML is allowed.</p>
+    <p>The content of this textarea will be appended to your exports. HTML is allowed.</p>
     <textarea id="custom_html"></textarea>
-    <button id="prompt2page">Export Interactions Page</button>
-    <button id="scratch_prompt2page">Export Scratch Pad &amp; Interactions Page</button>
+    <button id="prompt2page">Download Interactions Page</button>
+    <button id="scratch_prompt2page">Download Scratch Pad &amp; Interactions Page</button>
 
     <h3>Prompt Templates</h3>
     <p>
       Author your own prompt templates below, or explore and contribute to our <a href="https://github.com/SuffolkLITLab/prompts/tree/main/docs/templates" target="_blank">library of templates</a> (pre-written template files you can upload here).
     </p>
     <p>
-      When crafting a template, use a mix of plain language and variable placeholders. Specifically, you can use double curly brackets to encase predefined variables and prompts for your user. If the text between the brackets matches one of our predefined variables, that section of text will be replaced with its content. For example, <code>{{highlighted}}</code> will be replaced by any selected/highlighted text on your current page, <code>{{innerText}}</code> will be replaced by the <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText" target="_blank">innerText</a> of your current page (roughly speaking the hard-coded text of a page), and <code>{{scratch}}</code> will be replaced with the contents of your <a href="scratch.html" target="_blank">Scratch Pad</a>. If the text within brackets is not a predefined variable, like <code>{{What is your name?}}</code>, it will trigger a user prompt that echo's its content (e.g., a text bubble containing, "What is your name?"). After the user answers, their reply will replace this placeholder (i.e., <code>{{What is your name?}}</code>). A list of predefined variables can be found in the sample templates: <a href="https://github.com/SuffolkLITLab/prompts/tree/main#variables-random-outcomes-and-time" target="_blank">Variables "random outcomes" and "time"</a> and <a href="https://github.com/SuffolkLITLab/prompts/tree/main#variables-from-this-page" target="_blank">Variables "from this page"</a>. Both were included in the extension's default templates. If you read through some of the default templates, you may see comments between <code>[#</code> and <code>#]</code>. Such comments do not appear in the final prompts and are there to provide notes to template authors.
+      When crafting a template, use a mix of plain language and variable placeholders. Specifically, you can use double curly brackets to encase pre-defined variables and prompts for your user. If the text between the brackets matches one of our pre-defined variables, that section of text will be replaced with its content. For example, <code>{{highlighted}}</code> will be replaced by selected/highlighted text from the active tab when the popup is triggered, including text selected inside the LIT Prompting Scratch Pad or Templates &amp; Settings page, <code>{{innerText}}</code> will be replaced by the text of your current page, <code>{{innerHTML}}</code> by its body HTML, and <code>{{location}}</code> by the current page URL. If the text within brackets isn't a pre-defined variable, like  <code>{{What is your name?}}</code>, it will trigger a user prompt that echo's its content (e.g., "What is your name?"). After the user answers, their reply will replace this placeholder (i.e., <code>{{What is your name?}}</code>). A list of pre-defined variables can be found in the sample templates: <a href="https://github.com/SuffolkLITLab/prompts/tree/main#variables-from-this-page" target="_blank">Variables "random outcomes" and "time"</a> and <a href="https://github.com/SuffolkLITLab/prompts/tree/main#variables-random-outcomes-and-time" target="_blank">Variables "random outcomes" and "time"</a>. Both were included in the extension's default templates. Note: when looking at some templates, you will see comments between <code>[#</code> and <code>#]</code>. Such comments will not appear in the final prompts and are there to provide notes to template authors.
     </p>
-    <p>
-      <span style="background: #ffd5d5;"><b>For a discussion of the risks inherent in running LLMs on untrusted content, see the <a href="https://github.com/SuffolkLITLab/prompts/tree/main#trust-and-safety" target="_blank">Trust and Safety</a> section of the documentation.</b></span>
-    </p>
-    <p>
-      <b>Advanced:</b> Use the inputs after a template's name and body to set parameters. If you use the <i>Post-run Behavior</i> to send one template's output to another template, the first templat's output can be read by the second template via the <code>{{passThrough}}</code> variable. If this value is valid JSON, you can access individual elements by calling specific keys (e.g., <code>{{passThrough["key name"]}}</code>. When using the "DYNAMIC" setting for <i>Post-run Behavior</i> the prompt found in <code>{{passThrough["next"]}}</code> will be triggered. To get a better hold on these behaviors, we recommend you read through this set of <a href="https://github.com/SuffolkLITLab/prompts/tree/main#sample-templates" target="_blank">Sample Templates</a> in order. For a detailed discussion of how interactions work, see the documentation on <a href="https://github.com/SuffolkLITLab/prompts/tree/main#prompt-execution" target="_blank">Prompt Execution</a>.
-    </p>
-    <button id="add_prompt_to_list">Create New Template</button>
-    <span style="float:right">
-      <button id="downloadPrompts">Download</button>
-      <input type="file" id="fileInput" style="display: none;" accept=".txt" />
-      <button id="uploadPrompts" class="danger">Upload</button>
-      <button id="restoreDefaults" class="danger">Restore Defaults</button>
-      <button id="deletePrompts" class="danger" style="margin-right: 0;">Delete All</button>
-    </span>
+    <details class="settings-help template-advanced-help">
+      <summary>Advanced template settings</summary>
+      <div class="template-advanced-content">
+        <h4>Post-run passthrough</h4>
+        <p> Use the inputs after a template's name and body to set parameters. If you use the <i>Post-run Behavior</i> to send one template's output to another template, the first templat's output can be read by the second template via the <code>{{passThrough}}</code> variable. And if this value is valid JSON, you can access individual elements by calling specific keys (e.g., <code>{{passThrough["key name"]}}</code>. When using the "DYNAMIC" setting for <i>Post-run Behavior</i> the prompt found in <code>{{passThrough["next"]}}</code> will be triggered. To get a better hold on these behaviors, we recommend you read through this set of <a href="https://github.com/SuffolkLITLab/prompts/tree/main#sample-tempaltes" target="_blank">sample templates</a> in order. You should also read this documenation on <a href="https://github.com/SuffolkLITLab/prompts/tree/main#variable-handling" target="_blank">variable handeling</a>.</p>
+        <h4>Endpoint routing and model controls</h4>
+        <p> Each prompt can optionally define its own endpoint; blank endpoints fall back to the Default API Endpoint. API keys are looked up by the effective endpoint and are never stored in downloaded prompt files. LIT Prompting detects the request protocol from that effective endpoint. Endpoints ending in <code>/responses</code> use OpenAI Responses; <code>/messages</code> uses native Anthropic Messages; <code>/chat/completions</code> and other endpoints keep the an OpenAI-compatible Chat shape. <i>Temperature</i> can be left blank for Auto/provider default. <i>Max Output Tokens</i> keeps a historical <code>max_tokens</code> key in prompt files but is translated to the parameter expected by the selected endpoint. <i>Reasoning Effort</i> and <i>Verbosity</i> are optional. For direct OpenAI endpoints, known model families get precise controls while unknown/future model names keep these newest controls. <code>Auto</code> omits these fields entirely. Generic compatible endpoints stay conservative and disable OpenAI-specific advanced fields. A capability status beneath each prompt's textarea explains the current behavior.</p>
+        <h4>Structured JSON</h4>
+        <p> When a template's <i>JSON</i> setting is set to <i>Yes</i>, a JSON Schema textarea appears. Paste a bare JSON Schema object there (for example, an object containing <code>type</code>, <code>properties</code>, and <code>required</code>). For Chat Completions endpoints, LIT Prompts wraps the schema in <code>response_format.type = "json_schema"</code>; for Responses endpoints it uses <code>text.format</code>; this works with servers such as LM Studio and Gemini's OpenAI-compatible endpoint when the selected model/server supports structured output. For an endpoint ending in <code>/messages</code>, LIT Prompts instead uses Anthropic's native <code>output_config.format</code> structured-output shape and reads the JSON from Claude's text content block. Anthropic's OpenAI-compatible <code>/chat/completions</code> endpoint ignores <code>response_format</code>, so use <code>/v1/messages</code> when you need schema enforcement with Claude. If JSON is enabled but the schema is blank, Chat Completions and Responses endpoints use the simpler <code>json_object</code> mode; native Anthropic receives a best-effort instruction to return only a JSON object because its Messages API has no equivalent schema-less <code>json_object</code> switch.</p>
+        <section class="javascript-template-help" aria-labelledby="javascript_templates_heading">
+          <h4 id="javascript_templates_heading">JavaScript Templates</h4>
+          <p><i>Output Type</i> can be set to <i>JavaScript</i> as well as <i>Prompt</i> or <i>LLM</i>. For a JavaScript template, the large template textarea contains JavaScript source code rather than prompt text. Endpoint, Model, Temperature, Max Output Tokens, Reasoning Effort, Verbosity, JSON, and JSON Schema do not apply and are disabled. Default Output, Post-run Behavior, and Hide Button continue to work normally.</p>
+          <p>JavaScript templates are transformation steps. The code runs in an isolated browser <code>USER_SCRIPT</code> world attached to the active webpage. It can use normal webpage APIs such as <code>window</code>, <code>document</code>, and <code>fetch()</code>, including reading or modifying the active page DOM, but it does <b>not</b> receive privileged WebExtension APIs. Network requests made by the code are subject to the normal rules of the page context, including CORS.</p>
+          <p><b>Browser support:</b> <span id="javascript_browser_support">Detecting browser…</span></p>
+          <div class="javascript-support-controls">
+            <button type="button" id="enable_javascript_templates" aria-describedby="javascript_browser_support javascript_permission_status">Check JavaScript Template Support</button>
+            <span id="javascript_permission_status" class="javascript-permission-status" aria-live="polite">Checking status…</span>
+          </div>
+          <p>The code receives values as real JavaScript variables; do <b>not</b> put <code>{{...}}</code> template placeholders into JavaScript source. Available variables include <code>passThrough</code>, <code>scratch</code>, <code>highlighted</code>, <code>innerText</code>, <code>innerHTML</code>, <code>location</code>, <code>nSelectedWords</code>, <code>nWordsOnPage</code>, the existing date/time variables (including zero-indexed <code>month</code>, one-indexed <code>month1</code>, and padded <code>month2d</code>), and random-value variables such as <code>coinFlip</code>, <code>d4</code>, <code>d6</code>, <code>d8</code>, <code>dPercent</code>, <code>d12</code>, and <code>d20</code>. The JavaScript name <code>dPercent</code> corresponds to the normal prompt placeholder <code>{{d%}}</code>. <code>scratch</code> is parsed as JSON when possible and otherwise remains a string. <code>passThrough</code> keeps the type returned by the previous step.</p>
+          <p>JavaScript may be synchronous or asynchronous. It must explicitly <code>return</code> a value. That returned value becomes the new <code>passThrough</code> value and can be sent to another Prompt, LLM, or JavaScript template with <i>Post-run Behavior</i>. Objects and arrays remain structured values, so a later Prompt/LLM template can use expressions such as <code>{{passThrough["name"]}}</code>. For example:</p>
+          <pre class="javascript-example"><code>return {
+  selectedText: highlighted,
+  wordCount: nSelectedWords,
+  sourceTitle: document.title
+};</code></pre>
+          <p>A later Prompt or LLM template could then use values such as <code>{{passThrough["selectedText"]}}</code> and <code>{{passThrough["wordCount"]}}</code>, just like the built-in chained templates do.</p>
+          <p>If the JavaScript throws/rejects, returns <code>undefined</code>, or returns a value that cannot be represented as JSON-compatible data, the interaction stops and the error is displayed in the transcript rather than passing an unreliable value to the next template. JavaScript execution is available only in a compatible browser extension build; exported standalone HTML interactions do not have the extension <code>userScripts</code> API.</p>
+
+        </section>
+      </div>
+    </details>
+
+    <div class="prompt-toolbar" role="group" aria-label="Template actions">
+      <button id="add_prompt_to_list">Create New Template</button>
+      <span style="float:right">
+        <button id="downloadPrompts">Download All</button>
+        <input type="file" id="fileInput" style="display: none;" accept=".txt,.json,application/json,text/plain" />
+        <button id="uploadPrompts">Upload</button>
+        <button id="restoreDefaults" class="danger">Restore Defaults</button>
+        <button id="deletePrompts" class="danger">Delete All</button>
+      </span>
+    </div>
+    <div class="prompt-filter-row">
+      <label for="prompt_filter">Filter templates</label>
+      <input type="search" id="prompt_filter" placeholder="Search name, prompt text, model, or endpoint" autocomplete="off" />
+      <button type="button" id="clear_prompt_filter">Clear</button>
+      <span id="prompt_filter_status" class="prompt-filter-status" aria-live="polite"></span>
+    </div>
+    <div id="prompt_validation_status" class="validation-status" aria-live="polite"></div>
 
     <div id="prompt_list"></div>
 
@@ -82,7 +143,7 @@
       <span style="float:right">
         <a href="https://github.com/SuffolkLITLab/prompts/" target="_projectPage">GitHub</a> | 
         <a href="https://github.com/SuffolkLITLab/prompts/issues" target="_logIssues">feedback</a> | 
-          <span id="version">v 0.2.1</span>
+          <span id="version">v 0.2.47</span>
       </span>
   </div>
     
