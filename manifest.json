@@ -1,33 +1,52 @@
 {
-    "manifest_version": 3,
-    "version": "0.2.0",
-    "name": "LIT Prompts",
-    "description": "Create and run LLM prompt templates based on in-browser content and user input.",
-    "homepage_url": "https://github.com/SuffolkLITLab/prompts",
-    "action": {
-        "default_icon": "img/icon-128.png",
-        "default_title": "LIT Prompts",
-        "default_popup": "popup.html"
-    },
-    "icons": {
-        "16": "img/icon-16.png",
-        "48": "img/icon-48.png",
-        "128": "img/icon-128.png" },
-    "background": {
-      "service_worker": "js/background.js",
-      "type": "module"
-    },
-    "permissions": [
-        "activeTab",
-        "scripting",
-        "clipboardWrite"
-    ],
-    "host_permissions": [
-        "http://*/*",
-        "https://*/*"
-      ],    
-    "options_ui": {
+  "manifest_version": 3,
+  "version": "1.0.0",
+  "name": "LIT Prompting",
+  "description": "Create and run LLM prompt templates based on in-browser content and user input.",
+  "homepage_url": "https://github.com/SuffolkLITLab/prompts",
+  "action": {
+    "default_icon": "img/icon-128.png",
+    "default_title": "LIT Prompting",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "img/icon-16.png",
+    "48": "img/icon-48.png",
+    "128": "img/icon-128.png"
+  },
+  "background": {
+    "service_worker": "js/background.js"
+  },
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "userScripts"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "options_ui": {
     "page": "options.html",
     "open_in_tab": true
+  },
+  "minimum_chrome_version": "135",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/selection_capture.js",
+        "js/selection_tracker.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
     }
+  ],
+  "optional_permissions": [
+    "clipboardRead",
+    "clipboardWrite"
+  ]
 }
